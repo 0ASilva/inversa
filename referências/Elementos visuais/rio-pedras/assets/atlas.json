@@ -1,0 +1,792 @@
+{
+ "escala": 2,
+ "folhas": {
+  "personagem": {
+   "arquivo": "personagem.png",
+   "celula": [
+    96,
+    144
+   ],
+   "ancora": [
+    48,
+    125
+   ],
+   "quadros": {
+    "idle_0": [
+     0,
+     0,
+     192,
+     288
+    ],
+    "idle_1": [
+     192,
+     0,
+     192,
+     288
+    ],
+    "idle_2": [
+     384,
+     0,
+     192,
+     288
+    ],
+    "idle_3": [
+     576,
+     0,
+     192,
+     288
+    ],
+    "crouch": [
+     768,
+     0,
+     192,
+     288
+    ],
+    "rise": [
+     960,
+     0,
+     192,
+     288
+    ],
+    "apex": [
+     1152,
+     0,
+     192,
+     288
+    ],
+    "fall": [
+     1344,
+     0,
+     192,
+     288
+    ],
+    "land_0": [
+     1536,
+     0,
+     192,
+     288
+    ],
+    "land_1": [
+     1728,
+     0,
+     192,
+     288
+    ],
+    "cheer_0": [
+     1920,
+     0,
+     192,
+     288
+    ],
+    "cheer_1": [
+     2112,
+     0,
+     192,
+     288
+    ],
+    "cheer_2": [
+     2304,
+     0,
+     192,
+     288
+    ],
+    "cheer_3": [
+     2496,
+     0,
+     192,
+     288
+    ],
+    "sad_0": [
+     2688,
+     0,
+     192,
+     288
+    ],
+    "sad_1": [
+     2880,
+     0,
+     192,
+     288
+    ],
+    "bau_idle_0": [
+     0,
+     288,
+     192,
+     288
+    ],
+    "bau_idle_1": [
+     192,
+     288,
+     192,
+     288
+    ],
+    "bau_idle_2": [
+     384,
+     288,
+     192,
+     288
+    ],
+    "bau_idle_3": [
+     576,
+     288,
+     192,
+     288
+    ],
+    "bau_crouch": [
+     768,
+     288,
+     192,
+     288
+    ],
+    "bau_rise": [
+     960,
+     288,
+     192,
+     288
+    ],
+    "bau_apex": [
+     1152,
+     288,
+     192,
+     288
+    ],
+    "bau_fall": [
+     1344,
+     288,
+     192,
+     288
+    ],
+    "bau_land_0": [
+     1536,
+     288,
+     192,
+     288
+    ],
+    "bau_land_1": [
+     1728,
+     288,
+     192,
+     288
+    ],
+    "bau_cheer_0": [
+     1920,
+     288,
+     192,
+     288
+    ],
+    "bau_cheer_1": [
+     2112,
+     288,
+     192,
+     288
+    ],
+    "bau_cheer_2": [
+     2304,
+     288,
+     192,
+     288
+    ],
+    "bau_cheer_3": [
+     2496,
+     288,
+     192,
+     288
+    ],
+    "bau_sad_0": [
+     2688,
+     288,
+     192,
+     288
+    ],
+    "bau_sad_1": [
+     2880,
+     288,
+     192,
+     288
+    ]
+   },
+   "animacoes": {
+    "idle": {
+     "quadros": [
+      "idle_0",
+      "idle_1",
+      "idle_2",
+      "idle_3"
+     ],
+     "fps": 6,
+     "loop": true
+    },
+    "crouch": {
+     "quadros": [
+      "crouch"
+     ],
+     "fps": 1,
+     "loop": false
+    },
+    "rise": {
+     "quadros": [
+      "rise"
+     ],
+     "fps": 1,
+     "loop": false
+    },
+    "apex": {
+     "quadros": [
+      "apex"
+     ],
+     "fps": 1,
+     "loop": false
+    },
+    "fall": {
+     "quadros": [
+      "fall"
+     ],
+     "fps": 1,
+     "loop": false
+    },
+    "land": {
+     "quadros": [
+      "land_0",
+      "land_1"
+     ],
+     "fps": 11,
+     "loop": false
+    },
+    "cheer": {
+     "quadros": [
+      "cheer_0",
+      "cheer_1",
+      "cheer_2",
+      "cheer_3"
+     ],
+     "fps": 8,
+     "loop": true
+    },
+    "sad": {
+     "quadros": [
+      "sad_0",
+      "sad_1"
+     ],
+     "fps": 3,
+     "loop": true
+    }
+   },
+   "variante_com_bau": {
+    "prefixo": "bau_"
+   }
+  },
+  "bau": {
+   "arquivo": "bau.png",
+   "celula": [
+    120,
+    120
+   ],
+   "ancora": [
+    60,
+    104
+   ],
+   "quadros": {
+    "closed_0": [
+     0,
+     0,
+     240,
+     240
+    ],
+    "closed_1": [
+     240,
+     0,
+     240,
+     240
+    ],
+    "opening_0": [
+     480,
+     0,
+     240,
+     240
+    ],
+    "opening_1": [
+     720,
+     0,
+     240,
+     240
+    ],
+    "opening_2": [
+     960,
+     0,
+     240,
+     240
+    ],
+    "opening_3": [
+     0,
+     240,
+     240,
+     240
+    ],
+    "open_0": [
+     240,
+     240,
+     240,
+     240
+    ],
+    "open_1": [
+     480,
+     240,
+     240,
+     240
+    ],
+    "open_2": [
+     720,
+     240,
+     240,
+     240
+    ],
+    "open_3": [
+     960,
+     240,
+     240,
+     240
+    ]
+   },
+   "animacoes": {
+    "fechado": {
+     "quadros": [
+      "closed_0",
+      "closed_1"
+     ],
+     "fps": 1.4,
+     "loop": true
+    },
+    "abrindo": {
+     "quadros": [
+      "opening_0",
+      "opening_1",
+      "opening_2",
+      "opening_3"
+     ],
+     "fps": 9,
+     "loop": false
+    },
+    "aberto": {
+     "quadros": [
+      "open_0",
+      "open_1",
+      "open_2",
+      "open_3"
+     ],
+     "fps": 8,
+     "loop": true
+    }
+   }
+  },
+  "pedras": {
+   "arquivo": "pedras.png",
+   "celula": [
+    104,
+    84
+   ],
+   "ancora": [
+    52,
+    36
+   ],
+   "quadros": {
+    "v0_idle_0": [
+     0,
+     0,
+     208,
+     168
+    ],
+    "v0_idle_1": [
+     208,
+     0,
+     208,
+     168
+    ],
+    "v0_idle_2": [
+     416,
+     0,
+     208,
+     168
+    ],
+    "v0_idle_3": [
+     624,
+     0,
+     208,
+     168
+    ],
+    "v0_press_0": [
+     832,
+     0,
+     208,
+     168
+    ],
+    "v0_press_1": [
+     1040,
+     0,
+     208,
+     168
+    ],
+    "v0_press_2": [
+     1248,
+     0,
+     208,
+     168
+    ],
+    "v0_press_3": [
+     1456,
+     0,
+     208,
+     168
+    ],
+    "v1_idle_0": [
+     0,
+     168,
+     208,
+     168
+    ],
+    "v1_idle_1": [
+     208,
+     168,
+     208,
+     168
+    ],
+    "v1_idle_2": [
+     416,
+     168,
+     208,
+     168
+    ],
+    "v1_idle_3": [
+     624,
+     168,
+     208,
+     168
+    ],
+    "v1_press_0": [
+     832,
+     168,
+     208,
+     168
+    ],
+    "v1_press_1": [
+     1040,
+     168,
+     208,
+     168
+    ],
+    "v1_press_2": [
+     1248,
+     168,
+     208,
+     168
+    ],
+    "v1_press_3": [
+     1456,
+     168,
+     208,
+     168
+    ],
+    "v2_idle_0": [
+     0,
+     336,
+     208,
+     168
+    ],
+    "v2_idle_1": [
+     208,
+     336,
+     208,
+     168
+    ],
+    "v2_idle_2": [
+     416,
+     336,
+     208,
+     168
+    ],
+    "v2_idle_3": [
+     624,
+     336,
+     208,
+     168
+    ],
+    "v2_press_0": [
+     832,
+     336,
+     208,
+     168
+    ],
+    "v2_press_1": [
+     1040,
+     336,
+     208,
+     168
+    ],
+    "v2_press_2": [
+     1248,
+     336,
+     208,
+     168
+    ],
+    "v2_press_3": [
+     1456,
+     336,
+     208,
+     168
+    ]
+   },
+   "animacoes": {
+    "v0_idle": {
+     "quadros": [
+      "v0_idle_0",
+      "v0_idle_1",
+      "v0_idle_2",
+      "v0_idle_3"
+     ],
+     "fps": 5,
+     "loop": true
+    },
+    "v0_press": {
+     "quadros": [
+      "v0_press_0",
+      "v0_press_1",
+      "v0_press_2",
+      "v0_press_3"
+     ],
+     "fps": 11,
+     "loop": false
+    },
+    "v1_idle": {
+     "quadros": [
+      "v1_idle_0",
+      "v1_idle_1",
+      "v1_idle_2",
+      "v1_idle_3"
+     ],
+     "fps": 5,
+     "loop": true
+    },
+    "v1_press": {
+     "quadros": [
+      "v1_press_0",
+      "v1_press_1",
+      "v1_press_2",
+      "v1_press_3"
+     ],
+     "fps": 11,
+     "loop": false
+    },
+    "v2_idle": {
+     "quadros": [
+      "v2_idle_0",
+      "v2_idle_1",
+      "v2_idle_2",
+      "v2_idle_3"
+     ],
+     "fps": 5,
+     "loop": true
+    },
+    "v2_press": {
+     "quadros": [
+      "v2_press_0",
+      "v2_press_1",
+      "v2_press_2",
+      "v2_press_3"
+     ],
+     "fps": 11,
+     "loop": false
+    }
+   }
+  },
+  "efeitos": {
+   "arquivo": "efeitos.png",
+   "celula": [
+    96,
+    96
+   ],
+   "ancora": [
+    48,
+    70
+   ],
+   "quadros": {
+    "splash_0": [
+     0,
+     0,
+     192,
+     192
+    ],
+    "splash_1": [
+     192,
+     0,
+     192,
+     192
+    ],
+    "splash_2": [
+     384,
+     0,
+     192,
+     192
+    ],
+    "splash_3": [
+     576,
+     0,
+     192,
+     192
+    ],
+    "splash_4": [
+     768,
+     0,
+     192,
+     192
+    ],
+    "splash_5": [
+     0,
+     192,
+     192,
+     192
+    ],
+    "brilho_0": [
+     192,
+     192,
+     192,
+     192
+    ],
+    "brilho_1": [
+     384,
+     192,
+     192,
+     192
+    ],
+    "brilho_2": [
+     576,
+     192,
+     192,
+     192
+    ],
+    "brilho_3": [
+     768,
+     192,
+     192,
+     192
+    ]
+   },
+   "animacoes": {
+    "respingo": {
+     "quadros": [
+      "splash_0",
+      "splash_1",
+      "splash_2",
+      "splash_3",
+      "splash_4",
+      "splash_5"
+     ],
+     "fps": 14,
+     "loop": false
+    },
+    "brilho": {
+     "quadros": [
+      "brilho_0",
+      "brilho_1",
+      "brilho_2",
+      "brilho_3"
+     ],
+     "fps": 8,
+     "loop": true
+    }
+   }
+  },
+  "agua": {
+   "arquivo": "agua_correnteza.png",
+   "celula": [
+    352,
+    664
+   ],
+   "ancora": [
+    0,
+    0
+   ],
+   "quadros": {
+    "agua_0": [
+     0,
+     0,
+     704,
+     1328
+    ],
+    "agua_1": [
+     704,
+     0,
+     704,
+     1328
+    ],
+    "agua_2": [
+     1408,
+     0,
+     704,
+     1328
+    ],
+    "agua_3": [
+     2112,
+     0,
+     704,
+     1328
+    ],
+    "agua_4": [
+     0,
+     1328,
+     704,
+     1328
+    ],
+    "agua_5": [
+     704,
+     1328,
+     704,
+     1328
+    ],
+    "agua_6": [
+     1408,
+     1328,
+     704,
+     1328
+    ],
+    "agua_7": [
+     2112,
+     1328,
+     704,
+     1328
+    ]
+   },
+   "animacoes": {
+    "correnteza": {
+     "quadros": [
+      "agua_0",
+      "agua_1",
+      "agua_2",
+      "agua_3",
+      "agua_4",
+      "agua_5",
+      "agua_6",
+      "agua_7"
+     ],
+     "fps": 8,
+     "loop": true
+    }
+   },
+   "observacao": "Ladrilho horizontal sem emenda: desenhar lado a lado (x = 0, 352, ...)."
+  }
+ },
+ "estaticos": {
+  "agua_base": {
+   "arquivo": "agua_base.png",
+   "tamanho": [
+    704,
+    664
+   ]
+  },
+  "margens": {
+   "arquivo": "margens.png",
+   "tamanho": [
+    704,
+    664
+   ]
+  }
+ }
+}
