@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roda de cifra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+/* VOICE: lúdico e claro, de atividade de sala — um disco decodificador de papelão de espião.
+   IDEA: a roda decodificadora com janela; o app se comporta como o objeto físico.
+   PICTURE: a própria roda, grande, com duas coroas sincronizadas e a janela fixa no topo.
+   COLOUR and TYPE: azul profundo (coroa de letras), azul-claro (coroa de números), amarelo de sinalização na janela; Archivo Black nas coroas, Archivo no texto.
+   LAYOUT: roda à esquerda, painel de tarefa à direita; abaixo de 760px empilha roda, controles, tarefa. */
+:root{color-scheme:light dark;
+--bg:light-dark(#f4f6f9,#0e1724);--ink:light-dark(#13202f,#e8eef6);--muted:light-dark(#56657a,#9fb0c4);
+--card:light-dark(#ffffff,#162335);--line:light-dark(#d5dde7,#2a3a50);
+--outer:light-dark(#14365c,#1f4f86);--outerInk:#ffffff;--inner:light-dark(#dbe8f6,#c9dcf2);--innerInk:#13202f;
+--hub:light-dark(#13202f,#0a121c);--win:#f2b705;--ok:light-dark(#17803d,#5fd38a);--bad:light-dark(#b42318,#ff8a7a)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Archivo,system-ui,sans-serif;overflow-x:clip}
+main{max-width:1180px;margin:0 auto;padding:clamp(20px,3vw,40px) max(4vw,16px)}
+h1{font:800 clamp(30px,4vw,44px)/1.05 Archivo,sans-serif;margin:0 0 6px;text-wrap:balance}
+.sub{margin:0 0 22px;color:var(--muted);max-width:62ch}
+.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);align-items:start}
+@media(max-width:760px){.layout{grid-template-columns:minmax(0,1fr)}}
+.wheel-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+#wheel{width:100%;max-width:520px;aspect-ratio:400/420;touch-action:none;user-select:none}
+#rot{transform-box:view-box;transform-origin:200px 200px;cursor:grab}
+#rot.snap{transition:transform .25s ease-out}
+#rot:focus{outline:none}.fring{fill:none;stroke:var(--win);stroke-width:4;opacity:0}#rot:focus-visible .fring{opacity:1}
+.ringO{stroke:var(--outer);fill:none}.ringI{stroke:var(--inner);fill:none}
+.lt{font:22px "Archivo Black",sans-serif;fill:var(--outerInk);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.nm{font:700 17px Archivo,sans-serif;fill:var(--innerInk);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.sep{stroke:rgba(255,255,255,.18);stroke-width:1}.sepI{stroke:rgba(19,32,47,.18);stroke-width:1}
+#hub{cursor:pointer}#hub circle{fill:var(--hub);transition:fill .15s}
+#hub:hover circle,#hub:focus-visible circle{fill:#24456e}#hub:focus{outline:none}
+#hub:active circle{fill:var(--win)}
+.hubT{fill:#fff;font:800 17px Archivo,sans-serif;text-anchor:middle;pointer-events:none}
+.hubS{fill:#9fb0c4;font:600 13px Archivo,sans-serif;text-anchor:middle;pointer-events:none}
+.rot-btns{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+#now{font-weight:700;min-width:9.5em;text-align:center}
+button{font:600 16px Archivo,sans-serif;min-height:44px;padding:8px 16px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--muted)}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--win);outline-offset:2px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid var(--outer);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.modes button{border:0;border-radius:0;background:transparent;min-height:48px}
+.modes button[aria-checked=true]{background:var(--outer);color:#fff}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px}
+h2{font:800 13px/1.2 Archivo,sans-serif;color:var(--muted);margin:0 0 8px}
+.seq{display:flex;flex-wrap:wrap;gap:6px;min-height:46px;margin-bottom:16px;align-items:center}
+.tk{min-width:40px;height:40px;padding:0 6px;display:grid;place-items:center;border-radius:8px;border:1.5px solid var(--line);font:800 18px Archivo,sans-serif;white-space:nowrap}
+.tk.done{opacity:.45}.tk.next{border-color:var(--win);background:color-mix(in srgb,var(--win) 22%,transparent)}
+.out .tk{background:color-mix(in srgb,var(--outer) 12%,transparent)}
+.semi{color:var(--muted);font-weight:800}
+.empty{color:var(--muted);font-size:15px}
+#fb{min-height:1.6em;margin:0 0 12px;font-weight:600}#fb.ok{color:var(--ok)}#fb.bad{color:var(--bad)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+details{margin-top:12px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:12px 16px}
+summary{cursor:pointer;font-weight:700;min-height:28px}
+details label{display:block;margin:10px 0 6px;font-size:15px}
+input{font:16px Archivo,sans-serif;min-height:44px;padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.inl{display:flex;gap:8px}.inl input{flex:1}
+.muted{color:var(--muted);font-size:15px;margin:10px 0 0}
+#err{color:var(--bad);font-size:15px;min-height:1.2em;margin:6px 0 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(prefers-reduced-motion:reduce){#rot.snap{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Roda de cifra</h1>
+<p class="sub">Gire a roda até o símbolo procurado ficar na janela amarela. Depois clique no centro para registrá-lo. Repita na ordem da mensagem.</p>
+
+<div class="layout">
+  <section class="wheel-wrap" aria-label="Roda de cifra">
+    <svg id="wheel" viewBox="0 -20 400 420" aria-hidden="false">
+      <g id="rot" tabindex="0" role="slider" aria-label="Roda: use as setas para girar e Enter para registrar" aria-valuemin="0" aria-valuemax="25"></g>
+      <path id="win" fill="#f2b705" fill-opacity=".28" stroke="#f2b705" stroke-width="3" pointer-events="none"></path>
+      <path d="M188 -16 L212 -16 L200 4 Z" fill="#f2b705" stroke="#13202f" stroke-width="1.5"></path>
+      <g id="hub" role="button" tabindex="0" aria-label="Registrar">
+        <circle cx="200" cy="200" r="92"></circle>
+        <text class="hubT" x="200" y="198" id="hubT">Registrar</text>
+        <text class="hubT" x="200" y="220" id="hubT2">letra</text>
+        <text class="hubS" x="200" y="248">clique aqui</text>
+      </g>
+    </svg>
+    <div class="rot-btns">
+      <button id="ccw" aria-label="Girar no sentido anti-horário">↺ Girar</button>
+      <span id="now" aria-live="polite"></span>
+      <button id="cw" aria-label="Girar no sentido horário">Girar ↻</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="modes" role="radiogroup" aria-label="O que o clique registra">
+      <button role="radio" id="mDec" aria-checked="true">Decodificar</button>
+      <button role="radio" id="mEnc" aria-checked="false">Codificar</button>
+    </div>
+    <div class="card">
+      <h2 id="taskTitle">Mensagem recebida</h2>
+      <div id="task" class="seq"></div>
+      <h2 id="outTitle">Você decifrou</h2>
+      <div id="out" class="seq out"></div>
+      <p id="fb" aria-live="polite"></p>
+      <div class="row">
+        <button id="undo">Apagar último</button>
+        <button id="clear">Limpar</button>
+        <button id="next">Nova mensagem</button>
+      </div>
+    </div>
+    <details>
+      <summary>Usar outra mensagem</summary>
+      <label for="custom" id="customLabel">Cole uma sequência recebida, com números de 1 a 26 separados por ponto e vírgula</label>
+      <div class="inl"><input id="custom" autocomplete="off" placeholder="7;19;8;1"><button id="useCustom">Usar</button></div>
+      <p id="err" aria-live="polite"></p>
+    </details>
+    <details>
+      <summary>Para o professor: chave da roda</summary>
+      <label for="key">Deslocamento entre as coroas (1 a 25)</label>
+      <div class="inl"><input id="key" type="number" min="1" max="25" inputmode="numeric"><button id="setKey">Aplicar</button></div>
+      <p class="muted">Com a chave k, a letra na posição i (A = 0, B = 1, …) fica alinhada ao número ((i + k) mod 26) + 1. Com k = 0, A ficaria sobre 1, por isso o mínimo é 1. Para colegas trocarem mensagens, todos precisam da mesma chave. Ela pode vir no endereço: #chave-5.</p>
+    </details>
+  </section>
+</div>
+<p class="sr" id="sr" aria-live="assertive"></p>
+</main>
+
+<script>
+{
+const N=26, STEP=360/N, CX=200, CY=200;
+const LET="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const WORDS=["FUNCAO","INVERSA","VOLTA","SEGREDO","ESPELHO","CHAVE","CODIGO","RETORNO","DESFAZER","ORDEM","RODA","CIFRA"];
+const $=id=>document.getElementById(id);
+const svg=$("wheel"), rot=$("rot");
+let key=3, theta=0, mode="decode", target=null, out=[];
+
+const hm=/^#chave-(\d+)$/.exec(location.hash);
+if(hm){const k=+hm[1]; if(k>=1&&k<=25) key=k;}
+
+const numAt=i=>((i+key)%N)+1;
+const idxOfNum=n=>(((n-1-key)%N)+N)%N;
+const idxTop=()=>((Math.round(-theta/STEP)%N)+N)%N;
+const pt=(r,a)=>{const t=a*Math.PI/180;return [CX+r*Math.sin(t),CY-r*Math.cos(t)];};
+const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toUpperCase().replace(/[^A-Z]/g,"");
+
+function build(){
+  let h=`<circle class="fring" cx="200" cy="200" r="195"/><circle class="ringO" cx="200" cy="200" r="171" stroke-width="42"/><circle class="ringI" cx="200" cy="200" r="121" stroke-width="58"/>`;
+  for(let i=0;i<N;i++){
+    const a=i*STEP, [lx,ly]=pt(171,a), [nx,ny]=pt(122,a);
+    const [s1,s2]=pt(150,a+STEP/2),[s3,s4]=pt(192,a+STEP/2),[s5,s6]=pt(92,a+STEP/2);
+    h+=`<line class="sep" x1="${s1}" y1="${s2}" x2="${s3}" y2="${s4}"/><line class="sepI" x1="${s5}" y1="${s6}" x2="${s1}" y2="${s2}"/>`;
+    h+=`<text class="lt" x="${lx}" y="${ly}" transform="rotate(${a} ${lx} ${ly})">${LET[i]}</text>`;
+    h+=`<text class="nm" id="n${i}" x="${nx}" y="${ny}" transform="rotate(${a} ${nx} ${ny})"></text>`;
+  }
+  rot.innerHTML=h;
+  const hw=STEP/2,[a1,a2]=pt(193,-hw),[b1,b2]=pt(193,hw),[c1,c2]=pt(93,hw),[d1,d2]=pt(93,-hw);
+  $("win").setAttribute("d",`M${a1} ${a2} A193 193 0 0 1 ${b1} ${b2} L${c1} ${c2} A93 93 0 0 0 ${d1} ${d2} Z`);
+  paintNums();
+}
+function paintNums(){for(let i=0;i<N;i++) $("n"+i).textContent=numAt(i);}
+
+function apply(announce){
+  rot.style.transform=`rotate(${theta}deg)`;
+  const i=idxTop();
+  $("now").textContent=`Na janela: ${LET[i]} ↔ ${numAt(i)}`;
+  rot.setAttribute("aria-valuenow",i);
+  rot.setAttribute("aria-valuetext",`letra ${LET[i]}, número ${numAt(i)}`);
+}
+function step(d){rot.classList.add("snap");theta=Math.round(theta/STEP)*STEP+d*STEP;apply();}
+
+// arrastar
+let drag=false,last=0;
+const ang=e=>{const r=svg.getBoundingClientRect();const sx=r.width/400,sy=r.height/420;
+  const x=e.clientX-(r.left+CX*sx), y=e.clientY-(r.top+(CY+20)*sy);return Math.atan2(x,-y)*180/Math.PI;};
+rot.addEventListener("pointerdown",e=>{drag=true;last=ang(e);rot.classList.remove("snap");rot.setPointerCapture(e.pointerId);rot.style.cursor="grabbing";});
+rot.addEventListener("pointermove",e=>{if(!drag)return;const a=ang(e);let d=a-last;if(d>180)d-=360;if(d<-180)d+=360;theta+=d;last=a;apply();});
+const end=()=>{if(!drag)return;drag=false;rot.style.cursor="";rot.classList.add("snap");theta=Math.round(theta/STEP)*STEP;apply();};
+rot.addEventListener("pointerup",end);rot.addEventListener("pointercancel",end);
+rot.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight"||e.key==="ArrowDown"){e.preventDefault();step(1);}
+  else if(e.key==="ArrowLeft"||e.key==="ArrowUp"){e.preventDefault();step(-1);}
+  else if(e.key==="Enter"||e.key===" "){e.preventDefault();register();}
+});
+$("cw").onclick=()=>step(1);$("ccw").onclick=()=>step(-1);
+
+// tarefa
+function makeTarget(word){
+  const w=norm(word);
+  return {word:w, seq:[...w].map(c=>numAt(LET.indexOf(c)))};
+}
+function newTask(){
+  let w;do{w=WORDS[Math.floor(Math.random()*WORDS.length)];}while(target&&w===target.word&&WORDS.length>1);
+  target=makeTarget(w);out=[];render("");
+}
+function len(){return target.word.length;}
+
+function register(){
+  if(out.length>=len()){fb("A mensagem já está completa. Apague ou limpe para refazer.","");return;}
+  const i=idxTop();
+  out.push(mode==="decode"?LET[i]:numAt(i));
+  $("sr").textContent=`Registrado ${out[out.length-1]}`;
+  render();
+}
+function fb(t,c){const f=$("fb");f.textContent=t;f.className=c||"";}
+
+function render(){
+  const isDec=mode==="decode";
+  const src=isDec?target.seq:[...target.word];
+  $("taskTitle").textContent=isDec?"Mensagem recebida":"Mensagem para codificar";
+  $("outTitle").textContent=isDec?"Você decifrou":"Você codificou";
+  $("hubT2").textContent=isDec?"letra":"número";
+  $("hub").setAttribute("aria-label",isDec?"Registrar letra":"Registrar número");
+  $("task").innerHTML=src.map((s,k)=>(isDec&&k?'<span class="semi">;</span>':'')+
+    `<span class="tk ${k<out.length?"done":k===out.length?"next":""}">${s}</span>`).join("");
+  $("out").innerHTML=out.length?out.map((s,k)=>(!isDec&&k?'<span class="semi">;</span>':'')+`<span class="tk">${s}</span>`).join("")
+    :`<span class="empty">${isDec?"As letras aparecem aqui.":"Os números aparecem aqui."}</span>`;
+  if(out.length<len()){fb("","");return;}
+  const ok=isDec?out.join("")===target.word:out.every((n,k)=>n===target.seq[k]);
+  if(ok) fb(isDec?`Mensagem decifrada: ${target.word}.`:`Mensagem codificada: ${target.seq.join(";")}.`,"ok");
+  else fb("Algo não bate. Compare cada posição com a mensagem e apague o que precisar.","bad");
+}
+
+function setMode(m){
+  mode=m;$("mDec").setAttribute("aria-checked",m==="decode");$("mEnc").setAttribute("aria-checked",m==="encode");
+  $("customLabel").textContent=m==="decode"?"Cole uma sequência recebida, com números de 1 a 26 separados por ponto e vírgula":"Digite uma palavra para codificar (acentos e espaços são ignorados)";
+  $("custom").placeholder=m==="decode"?"7;19;8;1":"MATEMATICA";
+  $("custom").value="";$("err").textContent="";
+  newTask();
+}
+$("mDec").onclick=()=>setMode("decode");$("mEnc").onclick=()=>setMode("encode");
+$("hub").addEventListener("click",register);
+$("hub").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();register();}});
+$("undo").onclick=()=>{out.pop();render();};
+$("clear").onclick=()=>{out=[];render();};
+$("next").onclick=newTask;
+
+$("useCustom").onclick=()=>{
+  const v=$("custom").value.trim();$("err").textContent="";
+  if(mode==="decode"){
+    const parts=v.split(/[;,\s]+/).filter(Boolean);
+    const nums=parts.map(Number);
+    if(!nums.length||nums.some(n=>!Number.isInteger(n)||n<1||n>26)){$("err").textContent="Use apenas números inteiros de 1 a 26, separados por ponto e vírgula.";return;}
+    target={word:nums.map(n=>LET[idxOfNum(n)]).join(""),seq:nums};
+  }else{
+    const w=norm(v);
+    if(!w){$("err").textContent="Digite ao menos uma letra.";return;}
+    target=makeTarget(w);
+  }
+  out=[];render();
+};
+$("custom").addEventListener("keydown",e=>{if(e.key==="Enter")$("useCustom").click();});
+
+$("key").value=key;
+$("setKey").onclick=()=>{
+  const k=+$("key").value;
+  if(!Number.isInteger(k)||k<1||k>25){$("key").value=key;return;}
+  key=k;paintNums();apply();
+  try{history.replaceState(null,"","#chave-"+k);}catch(e){}
+  target=makeTarget(target.word);out=[];render();
+};
+
+build();apply();newTask();
+}
+</script>
+</body>
+</html>
