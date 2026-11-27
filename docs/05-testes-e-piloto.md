@@ -23,6 +23,8 @@
 | T15 | teclado e leitor de tela | percorrer o app só com teclado e com leitor de tela | tudo é alcançável e anunciado | D |
 | T16 | armazenamento bloqueado | navegação anônima ou armazenamento desativado | o app funciona, sem persistência | D |
 | T17 | projeção | ler o QR a cerca de 3 m | lê de primeira | D |
+| T18 | menu livre | abrir o menu numa turma com itens desligados | o menu lista só os itens liberados | O |
+| T19 | começar do zero | usar "Começar do zero" num computador compartilhado | o progresso daquela turma é apagado | O |
 
 **T13** é o teste que valida a escolha do Apps Script. Se ele falhar, as alternativas são aumentar o intervalo de consulta ou o tempo de cache, ou trocar a API por Supabase ou Firebase.
 

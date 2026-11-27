@@ -4,7 +4,8 @@
 
 - **Público:** turmas do Ensino Médio Técnico (EMT) do IFRJ.
 - **Foco:** o desenvolvimento dos conceitos matemáticos. A v1 não coleta dados para pesquisa.
-- **Acesso:** cada estudante acessa uma vez, em geral durante a aula, no próprio celular ou num computador da escola.
+- **Acesso:** na v1, cada estudante acessa uma vez, em geral durante a aula, no próprio celular ou num computador da escola. A sugestão de dividir o percurso em três encontros (E1–E3, E4, E5–E8) fica registrada só como sugestão.
+- **Uso fora da aula:** deve ser possível, inclusive sem a orientação do professor. Como isso funciona (instalação, uso sem internet, o que o aluno vê sem código de turma) será planejado na retomada da arquitetura (ver `07`, P8).
 - **Controle docente:** o professor decide o que cada turma experimenta, e essa decisão pode mudar durante a aula.
 - **Rede da escola:** pode ser instável. O app não pode depender de conexão contínua.
 
@@ -16,7 +17,7 @@
 4. **Entrada do aluno:**
    - pelo QR, que abre o link já com o código e entra direto;
    - ou digitando o código numa tela inicial.
-5. **App filtrado:** o aluno vê somente os itens liberados, na ordem pedagógica definida no catálogo.
+5. **App filtrado:** o aluno vê somente os itens liberados, na ordem pedagógica definida no catálogo. O menu de etapas permite navegar livremente, mas só entre os itens liberados.
 6. **Atualização durante a aula:** o app reconsulta a configuração a cada 30 s e sempre que o aluno volta à aba. O item recém-liberado aparece com um aviso discreto ("Nova etapa liberada").
 7. **Regra de bloqueio:** se o professor desmarcar um item, ele some para quem ainda não o iniciou e continua disponível para quem já começou.
 8. **Dependências:** se um item exige outro (por exemplo, a abertura das cartas exige a Investigação 2 do gráfico com a função `fn-quad-r`), a planilha avisa o professor.

@@ -39,7 +39,7 @@
 | 90 | `et-transferir` | E8 | — | prevista; **fora da v1** |
 
 ¹ As partes de `et-rio` foram inferidas da descrição; confirmar se correspondem às telas reais.
-² Definir as partes de `et-maquinas` se houver telas distintas.
+² Definir as partes de `et-maquinas` se houver telas distintas. O E5 trabalha a composição e a identidade (ver `00`).
 ³ As partes de `et-diario` dependem da redistribuição entre E6, E7 e E8 (o E6 será revisto, aliviado pelo `tr-caderno`; ver `07`, O4). O antigo `et-reflexao` deixa de existir: a reflexão final é o `et-diario`.
 
 **Ordem de E4 e E5:** hoje o gráfico (E4) vem antes das máquinas (E5), que é de natureza numérica e operatória como E3. Essa ordem é **decisão em aberto** (ver `07`). Como os ids são estáveis, mudar a ordem custa apenas trocar o valor de `ordem`.

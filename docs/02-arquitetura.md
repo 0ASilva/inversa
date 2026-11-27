@@ -15,7 +15,7 @@
 |---|---|---|
 | Planilha | painel do professor: turmas e autorizações | Google Planilhas |
 | API | entrega a configuração da turma a partir do código | Google Apps Script, implantado como app da Web |
-| App do aluno | a atividade, filtrada pela configuração | HTML/CSS/JS estático |
+| App do aluno | a atividade, filtrada pela configuração | HTML/CSS/JS estático: a casca do piloto v0.33, com cada etapa num iframe |
 | Página de projeção | QR e código da turma para projetar | página estática do mesmo site |
 
 ## Por que a planilha é o painel do professor na v1
@@ -100,6 +100,16 @@ O QR é gerado no navegador por uma biblioteca de QR code e codifica `site/#K7Q4
 3. No modo `sorteio`, o app sorteia a abertura **uma vez** e guarda o resultado no navegador. Recarregar a página não troca a abertura.
 4. O app reconsulta a API a cada 30 s e quando o aluno volta à aba. Se a `versao` mudou, aplica as regras abaixo.
 
+## Casca e módulos
+
+A base é o piloto integrado v0.33 (`app/`): a casca carrega cada etapa num iframe e conversa com ela por mensagens. O contrato de módulo de `04` (M0.2) é implementado como **protocolo de mensagens**:
+- a casca envia ao módulo a configuração liberada (partes e opções, como as `fn-*`) e o estado salvo do aluno;
+- o módulo devolve `salvar(estado)`, `concluir()` e `registrarConjectura(texto)`.
+
+O módulo nunca lê a configuração da turma nem o `localStorage` diretamente: tudo passa pela casca.
+
+**Menu de etapas:** livre, mas mostra só os itens liberados para a turma.
+
 ## Regras de atualização
 
 | Mudança na planilha | Efeito no app do aluno |
@@ -115,6 +125,11 @@ O QR é gerado no navegador por uma biblioteca de QR code e codifica `site/#K7Q4
 - O progresso fica em `localStorage`, numa chave por código de turma: abertura sorteada, aposta e justificativa, respostas por etapa e etapas iniciadas e concluídas.
 - Toda leitura e escrita fica protegida por try/catch. Se o armazenamento falhar, o app funciona sem persistência e não quebra.
 - **Limitação aceita:** se o aluno trocar de aparelho ou de navegador, o progresso não o acompanha.
+- **Computador compartilhado:** o próximo aluno encontraria o progresso do anterior. O app precisa de uma opção "Começar do zero" que apague o progresso daquela turma (ver `07`, P8).
+
+## Direção a retomar
+
+O professor manteve a arquitetura acima para a v1, mas quer retomá-la para um funcionamento equivalente ao dos outros apps que já construiu: instalável, utilizável sem internet e fora da sala de aula, com a liberação por turma valendo em sala e, sem login, com o envio de progresso, aposta e caderno para a planilha. Isso muda a regra "nenhum dado de aluno no servidor" e está detalhado em `07`, P8.
 
 ## Hospedagem do site (decisão em aberto)
 

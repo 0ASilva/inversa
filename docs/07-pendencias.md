@@ -42,7 +42,7 @@ Pode implementar, com três cuidados:
 
 Ficam fora da v1 por decisão do professor. Registro aqui o que vale considerar quando voltarem:
 
-1. **Composição em E7 × a escolha feita em E3.** O quadro-resumo de E3 apresenta a composição **sem nomeá-la**, de propósito. A quarta pergunta de E7 ("como a composição ajuda a justificar…") exige mobilizar f(f⁻¹(x)) = x, que é um salto de formalização. Se E7 é o lugar onde a composição ganha nome, isso precisa ser uma decisão explícita, e E7 precisa de um andaime que E3 não deu.
+1. **Como o E5 justifica a composição.** A composição já está na v1: o E5 trabalha a composição da ida com a volta e a identidade que ela produz (momento Relacionar), e o E6 a retoma. O que fica em aberto é a **justificação**. Hoje a evidência é indutiva (algumas entradas que dão certo), e o app afirma que "a composição recupera toda entrada do domínio, não apenas os exemplos", em vez de o aluno chegar a isso. Com duas entradas (P7), a base indutiva fica ainda menor, então o peso da justificação recai no Explicar (por exemplo, simplificar 5·((x + 2)/5) − 2). Conferir também se as duas composições (volta depois da ida e ida depois da volta) aparecem. O quadro-resumo de E3, que mostra a composição sem nomeá-la, continua como está.
 2. **E7 depende do professor.** O esboço prevê "perguntas e contrapontos do professor". Isso descreve uma **discussão coletiva mediada**, mais do que uma etapa individual no app. Uma alternativa é transformar E7 num roteiro de discussão para o professor, com o app apenas projetando os casos de E4.
 3. **A restrição de domínio em E7 já está ilustrada em E4** (`fn-quad-pos` × `fn-quad-r`). Em E7 caberia justificá-la, não descobri-la.
 4. **E8, f(x) = 3 − 2x, é uma boa transferência.** A leitura da ordem das operações não é imediata (multiplica por −2 e depois soma 3), e o coeficiente negativo testa se o aluno inverte também o sinal. Ela pressupõe que E5 tenha liberado entradas negativas (P3).
@@ -56,3 +56,28 @@ Ficam fora da v1 por decisão do professor. Registro aqui o que vale considerar 
 | O2 | ~~adotar o `tr-caderno`~~ | **decidido: adotado** (26/11/2026) | ver `03` |
 | O3 | partes de `et-rio` e `et-maquinas` | confirmar pelas telas reais | necessário para o M0 |
 | O4 | revisar o E6 (hoje enfadonho, segundo o professor) e definir quem faz o fechamento: retomar a aposta, escolher uma evidência, registrar uma dúvida | (A) tudo no `et-diario`, e E8 fica só com a transferência; (B) o fechamento vira um módulo final próprio, sempre o último liberado, e o diário fica só com os rastros | **Recomendação para a v1: (A)**, porque o E6 já existe e E7 e E8 estão fora. (B) só faz sentido quando E8 voltar, porque o fechamento deve vir **depois** da transferência |
+
+## P7. E5: duas entradas e ciclo automático
+
+- **Decidido:** o E5 passa a usar **duas** entradas, registradas na mesma tabela, sem mudança de página e sem o botão "Nova". Terminado o ciclo com um número, o app pede outro automaticamente.
+- **Em aberto:** em que momento "enxugar" a experiência. O professor quer decidir isso com o app funcionando, tendo como referência a atividade Working Backwards do Desmos/Amplify (https://classroom.amplify.com/activity/6835ca2906c057e7a4280112).
+- **Cuidado:** ver P5.1. Menos entradas pedem mais apoio à justificação no Explicar.
+
+## P8. Retomar a arquitetura: app instalável e dados na planilha
+
+O professor manteve Planilha + Apps Script para a v1, mas quer retomar a arquitetura para que o app funcione como os outros que já construiu:
+- **instalável**, para usar sem internet;
+- **uso fora da sala de aula**, inclusive sem a orientação do professor;
+- **em sala**, acesso só ao que o professor liberou para a turma;
+- **sem login**, com o professor recebendo na planilha o progresso, a aposta e o caderno.
+
+**O que precisa ser resolvido antes de implementar:**
+1. **Isso reverte parte da decisão #4 de `08`** ("nenhum dado de aluno no servidor") e o item "fora da v1" de `01`. Precisa de uma decisão nova e explícita.
+2. **Identificação sem login:** sem nome, o professor recebe cadernos anônimos, que servem para ver a turma mas não para acompanhar um aluno. Com nome, passa a haver dado pessoal de menores, o que exige tratamento conforme a LGPD e, se houver pesquisa, o CEP do IFRJ.
+3. **O que o aluno vê fora da aula, sem código de turma:** tudo, um percurso padrão, ou a última configuração da sua turma.
+4. **Envio com rede ruim:** os dados ficam no aparelho e são enviados quando houver conexão, o que exige escrita na API (hoje ela só lê) e um teste de carga novo.
+5. **Computador compartilhado:** a opção "Começar do zero" (ver `02`) vale já para a v1.
+
+## P9. E2: conferir as telas
+
+A descrição do E2 em `00` foi atualizada a partir dos textos do código v0.33 (plano de ida visível durante a volta, comparação dos dois planos no final). Conferir nas telas e, com isso, fechar as partes de `et-rio` (O3). O professor considera esse ponto já resolvido no piloto.

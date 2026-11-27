@@ -10,6 +10,8 @@ O app foi planejado tendo como referência as **investigações matemáticas** d
 
 Esses momentos **não seguem ordem rígida**: aparecem de forma simultânea ou cíclica.
 
+**Comunicação e discussão coletiva:** ficam com o professor, em sala, fora do app. O app é individual e não envia nada, então não hospeda a discussão dos resultados da turma. Ele prepara essa discussão: as apostas, as conjecturas e o caderno são o material que o aluno leva para ela.
+
 **Posição do professor sobre a justificação:** ela não é tratada como fato a ser enunciado, e sim como **processo que se reconstitui e amadurece**, tanto na imersão específica no conceito quanto no contato com ideias adjacentes à noção de função. O app não espera um resultado pronto. Ele propõe a **construção de evidências** de que há uma organização de ideias que apoia a construção do conceito.
 
 ## Etapas (situação atual)
@@ -29,8 +31,9 @@ Os números E1 a E8 são os rótulos atuais. Os **ids fixos**, que valem daqui e
 
 ### E2. Rio / Caça ao tesouro (`et-rio`)
 - **Situação:** um pirata precisa atravessar um rio para resgatar um tesouro na outra margem.
-- **Ação do aluno:** indica, com setas (esquerda, subir, descer, direita) e quantidades, o caminho de ida até o tesouro e depois o caminho de volta. O app registra os dois e, ao final, mostra ida e volta juntas.
-- **Ênfase:** desfazer algo realizando ações contrárias, na ordem contrária.
+- **Ação do aluno:** monta o plano de ida com comandos de direção (esquerda, direita, subir, descer) e quantidade de saltos, numa barra que pode editar antes de executar. O caminho de ida é 3 para a direita e 5 para cima. Um salto sem pedra mostra um aviso neutro ("Faltou uma pedra neste trecho. Vamos rever o plano?").
+- **Volta:** com o tesouro, o aluno planeja a volta vendo o próprio plano de ida acima ("Seu plano de ida está acima. Como será a volta?"). Ao chegar, o app pede: "Compare seus dois planos".
+- **Ênfase:** desfazer algo realizando ações contrárias, na ordem contrária. No jogo, há um único caminho de pedras, então a única volta possível é descer 5 e depois ir 3 para a esquerda.
 - **Representação:** espacial e corporal, sem números como objeto de estudo.
 
 ### E3. Máquina da fita (`et-fita`)
@@ -57,9 +60,11 @@ Os números E1 a E8 são os rótulos atuais. Os **ids fixos**, que valem daqui e
 - **Observação:** o par x²/4 com x ≥ 0 e x²/4 com domínio ℝ **já cumpre o papel** do "módulo y = x²" proposto no brainstorm. Por isso o módulo separado foi eliminado.
 
 ### E5. Máquinas conectadas (`et-maquinas`)
-- **Situação:** a função como máquina. Um valor inicial passa por duas etapas, da esquerda para a direita, e se transforma num valor final.
+- **Situação:** a função como máquina. Um valor inicial passa por duas etapas, da esquerda para a direita, e se transforma num valor final. A função é f(x) = (x + 2)/5 (soma 2, divide por 5), e a volta é 5y − 2.
 - **Ação do aluno:** conhecendo a função de ida, escolhe entre algumas operações disponíveis as que correspondem a cada etapa da volta, para que a máquina, da direita para a esquerda, devolva o valor de entrada. Pode refazer as escolhas e testar outras entradas.
 - **Representação:** uma tabela com os valores parciais e finais da ida e da volta.
+- **Composição e identidade:** o E5 já trabalha a composição da ida com a volta e a identidade que ela produz (momentos Montar, Investigar, Explicar e Relacionar). A composição, portanto, **está na v1**. A questão em aberto é como o E5 a **justifica** (ver `07`, P5.1).
+- **Entradas:** passam a ser **duas**, registradas na mesma tabela, sem mudança de página e sem o botão "Nova": terminado o ciclo com um número, o app pede outro (ver `07`, P7).
 - **Revisões pendentes** (ver `07`): entrada hoje limitada a (0, 12] sem que o aluno saiba disso; permitir negativos; botão "refazer" piscar diante do erro.
 
 ### E6. Diário de descobertas (`et-diario`)
@@ -86,6 +91,8 @@ O objetivo é distinguir conseguir uma resposta, compreender o processo e conseg
 **Decisão do professor:** E7 e E8 ficam de fora até o percurso E2–E5 ganhar consistência.
 
 ## Leitura pela lente das investigações
+
+A comunicação não tem coluna porque fica com o professor, em sala (ver o início deste arquivo).
 
 | Etapa | Exploração / questões | Conjecturas | Testes e reformulação | Justificação |
 |---|---|---|---|---|
