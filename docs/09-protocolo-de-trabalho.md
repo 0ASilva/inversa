@@ -3,16 +3,17 @@
 ## Princípios
 
 1. **A memória do projeto são os arquivos, não as conversas.** Nem o Claude nem o ChatGPT veem o que o outro disse. O que não está nesta pasta não existe para a próxima sessão.
-2. **Uma única fonte de verdade:** um repositório (GitHub, recomendado) com `docs/` (esta pasta) e o código. Se o código hoje vive só dentro de uma sessão de IA, mova-o para o repositório antes de tudo.
-3. **Uma única IA escreve código.** A implementação acontece num só lugar. Duas IAs alterando os mesmos arquivos geram versões divergentes.
-4. **A outra IA é parecerista.** O ganho de trabalhar com as duas está no confronto, não na duplicação: uma propõe, a outra critica, e o professor decide.
-5. **O professor é o único que decide e o único que integra.** Ele atualiza os arquivos e registra as decisões em `08-decisoes.md`.
+2. **Uma única fonte de verdade:** o repositório https://github.com/0ASilva/inversa, com `docs/` (esta pasta) e o código.
+3. **Só o Claude Code escreve código.** Cada tarefa é feita numa branch própria e entregue como pull request. Duas IAs alterando os mesmos arquivos geram versões divergentes.
+4. **O ChatGPT revisa.** Ele lê o pull request ou o documento e critica, mas não envia alterações ao repositório. O ganho de trabalhar com as duas está no confronto, não na duplicação.
+5. **O professor é o único que decide.** Ele aprova pelo comportamento do app (telas e critérios de aceite), não pelo código, e não resolve conflitos de código: isso é tarefa da IA que implementa. O professor não quer aprender programação. A IA propõe as linhas de `08-decisoes.md`, e o professor confirma o texto no pull request.
 
 ## Papéis sugeridos
 
 | Tarefa | Onde | Por quê |
 |---|---|---|
-| Implementação (M0 a M7, conteúdo das etapas) | **Claude Code**, ligado ao repositório | já é onde o app foi construído; trabalha direto nos arquivos e roda testes |
+| Implementação (M0 a M7, conteúdo das etapas) | **Claude Code**, ligado ao repositório, por branch e pull request | trabalha direto nos arquivos, roda testes e abre o pull request |
+| Revisão do pull request | **ChatGPT** | segunda opinião sobre o que foi implementado |
 | Discussão pedagógica e de design | qualquer uma das duas | |
 | Revisão crítica de uma decisão ou de um texto | **a IA que não propôs** | segunda opinião independente |
 | Redação de textos de tela (enunciados, feedbacks) | qualquer uma, com revisão da outra | |
@@ -23,7 +24,7 @@
 2. **Colar o prompt de abertura** (abaixo) e anexar só os arquivos relevantes.
 3. **Trabalhar** numa pergunta delimitada.
 4. **Fechar** com o prompt de fechamento (abaixo).
-5. **Integrar:** aplicar as alterações aos arquivos, registrar as decisões em `08` e fazer commit.
+5. **Integrar:** o Claude Code aplica as alterações numa branch, propõe as linhas de `08` e abre o pull request; o professor revisa e aprova o merge.
 6. **Opcional:** levar a decisão para a outra IA com o prompt de parecer.
 
 ## Prompt de abertura
@@ -52,6 +53,14 @@ Outra IA propôs a decisão abaixo. Critique-a: ponto mais fraco, alternativa,
 o que um professor de matemática ou um parecerista objetaria.
 [decisão]
 ```
+
+## Antes de cada lote
+
+Ler a continuidade e conferir a branch e o commit de base. Não editar só um HTML compilado: editar os fontes e recompilar. Não editar ao mesmo tempo o mesmo arquivo em cópias divergentes.
+
+## Escolha de modelo no ChatGPT
+
+O plano do ChatGPT recomenda testar o GPT-5.6 Sol num lote delimitado e comparar fidelidade aos ativos, regressões, clareza do registro e retrabalho. **Não verificado pelo Claude:** a existência e a disponibilidade desses modelos na conta precisam ser conferidas. Trocar de modelo não amplia cotas.
 
 ## Quando as duas IAs discordarem
 

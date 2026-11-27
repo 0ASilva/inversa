@@ -14,7 +14,7 @@ Os marcos estão em ordem de dependência. Cada um tem um critério de aceite ve
 
 **M0.1. Ids** (feito): os ids estão fixados em `03-catalogo-de-itens.md`. Falta confirmar as partes de `et-rio`, `et-maquinas` e `et-diario` (ver `07`, O3 e O4).
 
-**M0.2. Contrato de módulo.** Cada etapa, abertura e recurso transversal vira um módulo que declara:
+**M0.2. Contrato de módulo.** A base é a casca do piloto v0.33, com cada etapa num iframe. O contrato é um **protocolo de mensagens** entre a casca e o módulo (ver `02`, "Casca e módulos"). Cada etapa, abertura e recurso transversal é um módulo que declara:
 
 | campo | exemplo |
 |---|---|
@@ -25,11 +25,11 @@ Os marcos estão em ordem de dependência. Cada um tem um critério de aceite ve
 | `partes` | `["et-fita.experimentar", …]` |
 | `requer`, `pressupoe` | ver `03` |
 
-Cada módulo também oferece uma função de montagem, que recebe:
-- o contêiner da tela;
+Ao carregar o módulo, a casca envia por mensagem:
 - as partes e opções liberadas (por exemplo, quais `fn-*`);
-- o estado salvo do aluno nesse módulo;
-- as funções `salvar(estado)`, `concluir()` e `registrarConjectura(texto)`, esta última para o `tr-caderno`.
+- o estado salvo do aluno nesse módulo.
+
+O módulo responde à casca com as mensagens `salvar(estado)`, `concluir()` e `registrarConjectura(texto)`, esta última para o `tr-caderno`.
 
 Um módulo **nunca** lê a configuração da turma diretamente nem chama outro módulo. Tudo passa pela casca.
 
@@ -37,7 +37,7 @@ Um módulo **nunca** lê a configuração da turma diretamente nem chama outro m
 
 **M0.4. Montagem pela lista.** A casca recebe uma lista de ids liberados e monta somente esses módulos, na ordem do registro.
 
-**M0.5. Migração das etapas existentes.** Adaptar E2 a E6 ao contrato, uma por vez. A ordem sugerida, da mais simples para a mais complexa, é `et-rio`, `et-maquinas`, `et-fita`, `et-grafico`. O `et-diario` vem por último, porque será revisto (O4).
+**M0.5. Adaptação das etapas existentes.** Adaptar E2 a E6 ao protocolo, uma por vez, **sem reescrever** as etapas: o conteúdo e as animações do piloto v0.33 ficam como estão, e só se acrescenta a troca de mensagens. A ordem sugerida, da mais simples para a mais complexa, é `et-rio`, `et-maquinas`, `et-fita`, `et-grafico`. O `et-diario` vem por último, porque será revisto (O4). Pendentes no conteúdo: a atualização do E2 feita pelo Claude e as novas imagens de E4 e E6.
 
 **M0.6. Slot da abertura.** Retirar a página de textos E1 e deixar um slot vazio de abertura. Se nenhuma abertura estiver ligada, o app vai direto à primeira etapa.
 
@@ -98,4 +98,4 @@ Para cada item, preencher a **ficha** de `06-abertura.md` (seção 6) antes de i
 
 ## Sugestão de uso com o Claude Code
 
-Pedir **um marco por sessão**, anexando este arquivo junto com `02` e `03`, e exigir que o critério de aceite seja demonstrado antes de passar ao próximo marco. O M1 depende de ações na conta Google do professor (criar a planilha e implantar o script), que o Claude Code não faz sozinho; ele pode, porém, gerar o código do Apps Script e o passo a passo da implantação.
+Pedir **um marco por sessão**, cada um numa branch com pull request, e exigir que o critério de aceite seja demonstrado antes de passar ao próximo marco (ver `09`). O M1 depende de ações na conta Google do professor (criar a planilha e implantar o script), que o Claude Code não faz sozinho; ele pode, porém, gerar o código do Apps Script e o passo a passo da implantação.

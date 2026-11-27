@@ -32,21 +32,31 @@ Os estudantes passam a ver somente o que foi liberado. **Nenhum dado de estudant
 - **Backend:** Google Planilhas e Google Apps Script.
 - **Painel do professor na v1:** a própria planilha.
 - **Acesso do aluno:** um código por turma, com o QR levando o código embutido no link.
-- **Progresso do aluno:** salvo só no navegador do aluno.
+- **Progresso do aluno:** salvo só no navegador do aluno (`localStorage`), incluindo aposta e caderno.
+- **Menu livre coexistindo com a liberação:** o aluno navega livremente, mas só entre os itens que a turma liberou.
 - **Liberação no meio da aula:** o item aparece sem recarregar a página. **Bloqueio no meio da aula:** vale só para itens que o aluno ainda não iniciou.
 - **Ids semânticos e estáveis** (`et-fita`, `ab-magica`…). A ordem fica separada, no catálogo.
 - **E7 e E8 fora da v1.** O E6 (`et-diario`) é a reflexão final e será revisto.
 - **Caderno de conjecturas (`tr-caderno`) adotado:** registra a aposta e as conjecturas e as retoma ao longo do app.
 - **Aberturas eliminadas:** o GPS, que reproduz o E2. O `mod-x2` também saiu, porque a Investigação 2 de E4 já tem o par x²/4 com x ≥ 0 e x²/4 em ℝ.
+- **Base de código:** o piloto integrado v0.33 (casca com iframes). O contrato de módulo é um protocolo de mensagens entre a casca e cada etapa.
+- **Fluxo de trabalho:** só o Claude Code escreve código, por branch e pull request; o ChatGPT revisa; o professor aprova pelo comportamento do app, sem resolver conflitos de código.
+
+- **Funções das etapas:** E3 com f(n) = n/2 + 3; E5 com f(x) = (x + 2)/5 e volta 5y − 2.
+- **Princípios de interação:** erro como retomada, sem penalidade; acerto celebrado; leitura apoiada pela ação; celular primeiro; ativos autorais sem redesenho (ver `00`).
+- **Layout comum v0.33** e regras do E4 (P′, translação sem rotação, retomadas, rastro só após a conjectura).
+- **Hospedagem:** GitHub do professor.
 
 ## Em aberto (ver `07`)
 
 - Redistribuir funções entre E6, E7 e E8, para evitar repetições (O4).
 - Ordem entre o gráfico e as máquinas (E4/E5).
 - Partes de `et-rio`, `et-maquinas` e `et-diario`.
+- E5 com duas entradas e ciclo automático; momento de "enxugar" a experiência (P7).
+- **Direção a retomar (P8):** app instalável, uso sem internet e fora da sala de aula, e envio de progresso, aposta e caderno para a planilha do professor.
 
 ## Fora da v1
 
 - Painel do professor dentro do site, com login próprio.
-- Registro de dados de estudantes no servidor (depende do tratamento de dados e, se houver pesquisa, do CEP do IFRJ).
+- Registro de dados de estudantes no servidor (depende do tratamento de dados e, se houver pesquisa, do CEP do IFRJ). O professor já indicou que quer receber esses dados na planilha numa versão futura: ver P8 em `07`.
 - Roda de cifra e atividades do GeoGebra como itens da suíte.
