@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict');const E=require('../piloto-rio/engine.js');const c=(direction,count)=>({direction,count});
+assert.equal(E.simulate([c('right',3),c('up',5)]).complete,true);
+assert.equal(E.simulate([c('down',5),c('left',3)],'back').complete,true);
+assert.equal(E.simulate([c('left',3),c('down',5)],'back').blocked.index,0);
+assert.deepEqual(E.simulate([c('right',4)]).position,[3,0]);
+assert.equal(E.simulate([c('right',1),c('right',2),c('up',2),c('up',3)]).complete,true);
+assert.equal(E.simulate([c('down',2),c('down',3),c('left',3)],'back').complete,true);
+assert.equal(E.simulate([c('right',2)]).complete,false);
+assert.equal(E.simulate([]).empty,true);
+assert.equal(E.simulate([c('right',1),c('left',1),c('right',3),c('up',5)]).complete,true);
+assert.throws(()=>E.simulate([c('up',0)]));
+console.log('10 verificações de regras passaram.');

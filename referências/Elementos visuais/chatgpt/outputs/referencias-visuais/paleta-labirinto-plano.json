@@ -1,0 +1,20 @@
+{
+  "fonte": "index.html local fornecido pelo proponente; Labirinto Plano",
+  "data": "2026-11-24",
+  "status": "referência observada; adoção global em discussão",
+  "cores": {
+    "roxo": "#4B0082",
+    "roxo_escuro": "#3B1163",
+    "amarelo": "#FFD700",
+    "amarelo_claro": "#FFF3B0",
+    "laranja": "#FF6633",
+    "laranja_escuro": "#D94A1C",
+    "verde": "#1A7F4B",
+    "saida": "#CDEED8",
+    "papel": "#FFFDF5",
+    "lavanda": "#F4EEFF",
+    "texto": "#241436",
+    "texto_secundario": "#6B5B7D"
+  },
+  "fontes": "system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif"
+}
