@@ -42,3 +42,8 @@ body main>h2{margin:0;font-size:20px;line-height:1.2}body nav{flex:none}body nav
 body[data-activity='3'] .machine-area{flex:0 0 auto!important;aspect-ratio:480/300;min-height:0!important}
 
 body[data-activity='2'] .scene{flex:0 0 auto!important;aspect-ratio:480/450;min-height:0!important}
+
+/* Refazer só aparece quando há algo a refazer, e pulsa; Próximo pode pulsar ao fim de uma etapa. */
+.layout-footer .layout-pulse:not([hidden]):not(:disabled){animation:layout-pulse 1.3s ease-in-out infinite!important}
+@keyframes layout-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@media(prefers-reduced-motion:reduce){.layout-footer .layout-pulse{animation:none!important;outline:3px solid #ff6633;outline-offset:2px;border-radius:50%}}

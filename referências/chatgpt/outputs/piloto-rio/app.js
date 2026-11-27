@@ -24,7 +24,7 @@ $('carried').setAttribute('visibility',state.trip==='back'||state.arrived||state
 }
 function drawDraft(){for(const b of document.querySelectorAll('[data-edit-dir]'))b.setAttribute('aria-pressed',String(b.dataset.editDir===draft.direction));for(const b of document.querySelectorAll('[data-count]'))b.setAttribute('aria-pressed',String(+b.dataset.count===draft.count));$('editor-title').textContent=draft.index===null?`${dirs[draft.direction].label}: quantos saltos?`:`Editar comando ${draft.index+1}`;$('delete').hidden=draft.index===null;$('confirm').hidden=draft.index===null;$('editor-caption').textContent=draft.index===null?'Toque na quantidade para adicionar.':`${draft.count} para ${dirs[draft.direction].label.toLowerCase()}. Confirme para guardar a alteração.`;}
 function openEditor(index=null,direction='right'){if(state.running||state.arrived||state.done)return;draft=index===null?{index:null,direction,count:1}:{index,...state.commands[index]};drawDraft();$('editor').showModal();}
-function afterEdit(){state.blocked=-1;state.active=-1;$('blocked-mark').setAttribute('visibility','hidden');$('editor').close();draft=null;say('Plano atualizado. Toque em Experimentar.');render();}
+function afterEdit(){state.blocked=-1;state.active=-1;$('blocked-mark').setAttribute('visibility','hidden');$('editor').close();draft=null;say('Plano atualizado. Toque em Ir.');render();}
 for(const b of document.querySelectorAll('[data-dir]'))b.onclick=()=>openEditor(null,b.dataset.dir);
 for(const b of document.querySelectorAll('[data-edit-dir]'))b.onclick=()=>{draft.direction=b.dataset.editDir;drawDraft();};
 for(const b of document.querySelectorAll('[data-count]'))b.onclick=()=>{draft.count=+b.dataset.count;if(draft.index===null){state.commands.push({direction:draft.direction,count:draft.count});state.page=Math.floor((state.commands.length-1)/3);afterEdit();}else drawDraft();};
@@ -43,9 +43,9 @@ drawStones();setPosition([0,0]);render();
 if(window.RioCena)window.RioCena.montar($('board').parentElement,$('board')).then(c=>{cena=c;$('wake').replaceChildren();if(!state.running)setPosition(state.position);}).catch(()=>{});
 
 window.InverseActivity={
- help:'Planeje os saltos com as setas. Toque em cada comando para editar. Experimente a ida e depois descubra a volta. Próximo avança quando o percurso estiver concluído.',
+ help:'Planeje os saltos com as setas. Toque em cada comando para editar. Toque em Ir para experimentar a ida e depois descubra a volta. Próximo avança quando o percurso estiver concluído.',
  sources:['#go','#pause','#return','#restart'],
- state:()=>({atStart:state.trip==='out',busy:state.running,primary:!state.arrived&&!state.done?{label:state.running?(state.paused?'Retomar':'Pausar'):'Experimentar',disabled:!state.running&&!state.commands.length}:null,retry:!state.running&&!state.arrived&&!state.done&&!!state.commands.length,next:state.arrived||state.done,terminal:state.done}),
+ state:()=>({atStart:state.trip==='out',busy:state.running,primary:!state.arrived&&!state.done?{label:state.running?(state.paused?'Retomar':'Pausar'):'Ir',disabled:!state.running&&!state.commands.length}:null,retry:!state.running&&!state.arrived&&!state.done&&state.blocked>=0,next:state.arrived||state.done,terminal:state.done}),
  primary:()=>$(state.running?'pause':'go').click(),next:()=>$('return').click(),reset,
  back:()=>{++runToken;state.trip='out';state.arrived=true;state.done=false;state.commands=state.out.map(c=>({...c}));state.page=0;state.active=-1;state.blocked=-1;$('wake').replaceChildren();setPosition([3,5]);say('Reveja a ida e prepare novamente a volta.');render();},
  retry:()=>{state.commands=[];state.page=0;state.active=-1;state.blocked=-1;$('wake').replaceChildren();$('blocked-mark').setAttribute('visibility','hidden');setPosition(state.trip==='out'?[0,0]:[3,5]);say('Escolha novamente os comandos deste percurso.');render();}
