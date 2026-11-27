@@ -42,6 +42,11 @@ Os estudantes passam a ver somente o que foi liberado. **Nenhum dado de estudant
 - **Base de código:** o piloto integrado v0.33 (casca com iframes). O contrato de módulo é um protocolo de mensagens entre a casca e cada etapa.
 - **Fluxo de trabalho:** só o Claude Code escreve código, por branch e pull request; o ChatGPT revisa; o professor aprova pelo comportamento do app, sem resolver conflitos de código.
 
+- **Funções das etapas:** E3 com f(n) = n/2 + 3; E5 com f(x) = (x + 2)/5 e volta 5y − 2.
+- **Princípios de interação:** erro como retomada, sem penalidade; acerto celebrado; leitura apoiada pela ação; celular primeiro; ativos autorais sem redesenho (ver `00`).
+- **Layout comum v0.33** e regras do E4 (P′, translação sem rotação, retomadas, rastro só após a conjectura).
+- **Hospedagem:** GitHub do professor.
+
 ## Em aberto (ver `07`)
 
 - Redistribuir funções entre E6, E7 e E8, para evitar repetições (O4).

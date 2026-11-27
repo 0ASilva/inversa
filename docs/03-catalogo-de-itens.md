@@ -12,7 +12,7 @@
 
 **Regras:**
 - Os ids são **semânticos e estáveis**. Eles **não codificam a ordem**, porque a ordem fica na coluna `ordem` do catálogo. Assim, reordenar etapas (por exemplo, trocar E4 e E5) não muda nenhum id.
-- Os rótulos E1 a E8 deixam de ser usados no código. Podem continuar aparecendo apenas como numeração exibida ao aluno, se o professor quiser.
+- Os rótulos E1 a E8 deixam de ser usados no código e **não aparecem ao aluno** (layout v0.33: cabeçalho sem códigos de etapa).
 - Os ids usam só letras minúsculas sem acento, dígitos, hífen e ponto.
 
 ## Aberturas (slot que substitui E1)
@@ -33,14 +33,14 @@
 | 20 | `et-rio` | E2 | `et-rio.ida`, `et-rio.volta`, `et-rio.comparar` ¹ | implementada |
 | 30 | `et-fita` | E3 | `et-fita.experimentar`, `et-fita.representar`, `et-fita.desfazer`, `et-fita.generalizar`, `et-fita.resumo` | implementada |
 | 40 | `et-grafico` | E4 | `et-grafico.experimentar`, `et-grafico.inv-simetrico`, `et-grafico.inv-funcoes` | implementada |
-| 50 | `et-maquinas` | E5 | — ² | implementada; revisões em `07` |
-| 80 | `et-diario` | E6 | a definir ³ | implementada |
+| 50 | `et-maquinas` | E5 | `et-maquinas.montar`, `et-maquinas.investigar`, `et-maquinas.explicar`, `et-maquinas.relacionar` ² | implementada; revisões em `07` |
+| 80 | `et-diario` | E6 | `et-diario.rio`, `et-diario.fita`, `et-diario.reflexao`, `et-diario.composicao` ³ | implementada |
 | 85 | `et-justificar` | E7 | — | prevista; **fora da v1** |
 | 90 | `et-transferir` | E8 | — | prevista; **fora da v1** |
 
-¹ As partes de `et-rio` foram inferidas da descrição; confirmar se correspondem às telas reais.
-² Definir as partes de `et-maquinas` se houver telas distintas. O E5 trabalha a composição e a identidade (ver `00`).
-³ As partes de `et-diario` dependem da redistribuição entre E6, E7 e E8 (o E6 será revisto, aliviado pelo `tr-caderno`; ver `07`, O4). O antigo `et-reflexao` deixa de existir: a reflexão final é o `et-diario`.
+¹ As partes de `et-rio` correspondem aos textos do código v0.33 (plano de ida, plano de volta, "Compare seus dois planos"); conferir nas telas (`07`, P9).
+² Partes tiradas dos momentos do piloto v0.33. O E5 trabalha a composição e a identidade (ver `00`).
+³ Partes tiradas das retomadas do piloto v0.33; podem mudar com a redistribuição entre E6, E7 e E8 (o E6 será revisto, aliviado pelo `tr-caderno`; ver `07`, O4). O antigo `et-reflexao` deixa de existir: a reflexão final é o `et-diario`.
 
 **Ordem de E4 e E5:** hoje o gráfico (E4) vem antes das máquinas (E5), que é de natureza numérica e operatória como E3. Essa ordem é **decisão em aberto** (ver `07`). Como os ids são estáveis, mudar a ordem custa apenas trocar o valor de `ordem`.
 
@@ -93,7 +93,7 @@ As outras partes ficam sempre ligadas dentro da sua etapa, porque são sequencia
 | item | requer (o app bloqueia) | pressupõe (o app só avisa o professor) |
 |---|---|---|
 | `ab-cartas` | `et-grafico.inv-funcoes`, `fn-quad-r` | — |
-| `et-grafico.inv-funcoes` | ao menos uma `fn-*` | `et-grafico.inv-simetrico` |
+| `et-grafico.inv-funcoes` | ao menos uma `fn-*` | `et-grafico.inv-simetrico` (dentro da etapa, o rastro só libera após o acerto da conjectura) |
 | `tr-galeria` | `et-diario` | — |
 | `et-diario` | — | — |
 | `tr-caderno` | — | uma abertura ligada (para ter a aposta inicial) |

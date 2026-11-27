@@ -54,6 +54,14 @@ o que um professor de matemática ou um parecerista objetaria.
 [decisão]
 ```
 
+## Antes de cada lote
+
+Ler a continuidade e conferir a branch e o commit de base. Não editar só um HTML compilado: editar os fontes e recompilar. Não editar ao mesmo tempo o mesmo arquivo em cópias divergentes.
+
+## Escolha de modelo no ChatGPT
+
+O plano do ChatGPT recomenda testar o GPT-5.6 Sol num lote delimitado e comparar fidelidade aos ativos, regressões, clareza do registro e retrabalho. **Não verificado pelo Claude:** a existência e a disponibilidade desses modelos na conta precisam ser conferidas. Trocar de modelo não amplia cotas.
+
 ## Quando as duas IAs discordarem
 
 Registre as **duas posições** em `08`, decida e anote o motivo. Nenhuma IA decide. Atenção a textos que atribuem decisões a você ("você decidiu…"): confira se a decisão foi de fato sua.

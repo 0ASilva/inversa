@@ -14,6 +14,16 @@ Esses momentos **não seguem ordem rígida**: aparecem de forma simultânea ou c
 
 **Posição do professor sobre a justificação:** ela não é tratada como fato a ser enunciado, e sim como **processo que se reconstitui e amadurece**, tanto na imersão específica no conceito quanto no contato com ideias adjacentes à noção de função. O app não espera um resultado pronto. Ele propõe a **construção de evidências** de que há uma organização de ideias que apoia a construção do conceito.
 
+**Segundo referencial: DUA (Desenho Universal para a Aprendizagem, CAST, https://udlguidelines.cast.org/).** Orienta oferecer formas variadas de engajamento, representação e ação e expressão, sem abandonar o objetivo matemático. Jogos e animações não garantem o DUA por si sós, e o app não tem certificação de acessibilidade.
+
+## Princípios de interação
+
+- **Erro como retomada:** sem penalidade, vidas ou cronômetro. O erro convida a rever o plano.
+- **Acerto celebrado:** com animação e som, respeitando o som desligado e o movimento reduzido.
+- **Leitura apoiada pela ação:** os alunos do professor pouco leem espontaneamente. O texto não é eliminado, mas fica necessário para agir e é apoiado pela visualização.
+- **Celular primeiro:** a meta é realizar cada momento no celular sem rolar a tela, sem reduzir demais textos e alvos de toque (ver `05`).
+- **Ativos autorais:** usar exatamente os ativos fornecidos pelo professor, sem redesenhar nem recolorir. Não alterar a arte para contornar dificuldade técnica sem discutir.
+
 ## Etapas (situação atual)
 
 Os números E1 a E8 são os rótulos atuais. Os **ids fixos**, que valem daqui em diante, estão em `03-catalogo-de-itens.md`.
@@ -35,6 +45,7 @@ Os números E1 a E8 são os rótulos atuais. Os **ids fixos**, que valem daqui e
 - **Volta:** com o tesouro, o aluno planeja a volta vendo o próprio plano de ida acima ("Seu plano de ida está acima. Como será a volta?"). Ao chegar, o app pede: "Compare seus dois planos".
 - **Ênfase:** desfazer algo realizando ações contrárias, na ordem contrária. No jogo, há um único caminho de pedras, então a única volta possível é descer 5 e depois ir 3 para a esquerda.
 - **Representação:** espacial e corporal, sem números como objeto de estudo.
+- **Visual:** a direção é indicada por símbolo e texto, com apoio de cor para os pares horizontal e vertical. O cenário original está em `banco-imagens/ativos/rio-e2-cena-original.svg` (pasta do ChatGPT). Há uma nova animação do Rio feita com o Claude (`referências/Elementos visuais/rio-pedras/`), a integrar preservando as regras acima (ver `07`, P10).
 
 ### E3. Máquina da fita (`et-fita`)
 - **Situação:** uma máquina pega uma fita, corta-a ao meio e costura numa das metades um pedaço de 3 cm. Matematicamente, f(x) = x/2 + 3, e a inversa é y ↦ 2(y − 3).
@@ -43,6 +54,9 @@ Os números E1 a E8 são os rótulos atuais. Os **ids fixos**, que valem daqui e
   2. **Representar:** identifica as expressões numéricas, isto é, as operações sucessivas aplicadas ao comprimento que escolheu.
   3. **Desfazer:** indica, operação por operação, como recuperar o comprimento original.
   4. **Generalizar:** os comprimentos antes e depois da máquina passam a ser variáveis. O aluno indica as operações equivalentes às ações da máquina, com validação a cada operação e apoio visual, e usa a expressão para reconfirmar sua validade.
+- **Continuidade:** a saída real da experiência do aluno alimenta a tarefa de desfazer; não é substituída por um número fixo. Comprimentos ímpares produzem meios centímetros. A outra metade da fita fica reservada na cena, o que ajuda a entender o corte.
+- **Domínio:** comprimentos são positivos, então n > 0 e y > 3. O intervalo do controle não se confunde com o domínio matemático.
+- **Texto de tela:** a palavra "Desfazer" foi confundida com desfazer a última ação da interface. As instruções devem dizer que se trata de reconstruir o comprimento de entrada (ver `07`, P10).
 - **Ao final:** o aluno descreveu as expressões de f e da sua inversa como **relações entre variáveis**, sem a notação n(y) = …
 - **Quadro-resumo:** apresenta as operações como etapas que se compõem, **sem nomear** a composição de funções.
 
@@ -56,11 +70,18 @@ Os números E1 a E8 são os rótulos atuais. Os **ids fixos**, que valem daqui e
   - x³/25, com domínio ℝ.
 
   Ao mover P sobre o gráfico, P′ deixa o rastro da curva simétrica. O movimento pode ser feito arrastando, por seletor ou pelo botão "Varrer". O domínio é sempre exibido.
+- **Notação:** P e P′, nunca Q para o simétrico.
+- **Animação do simétrico:** O é o ponto médio de PP′, na reta y = x; A e B são os pontos médios de OP e OP′, todos invisíveis e sem rastro. A cópia de OP se **translada sem girar** até coincidir com OP′. A parametrização completa está na especificação do ChatGPT.
+- **Retomadas:** um erro na pergunta numérica reabre a experiência geométrica para marcar o simétrico. Um erro na pergunta simbólica retoma a experiência com eixos sem marcas nem números, só com coordenadas simbólicas. As alternativas ficam visíveis em botões, não num seletor.
+- **Liberação do rastro:** a Investigação 2 só é liberada depois do acerto da conjectura (a, b) → (b, a). Um acerto isolado não atesta compreensão.
 - **Pergunta final atual:** "O reflexo é função sobre a imagem de f?" **Está em revisão** (ver `07-pendencias.md`).
 - **Observação:** o par x²/4 com x ≥ 0 e x²/4 com domínio ℝ **já cumpre o papel** do "módulo y = x²" proposto no brainstorm. Por isso o módulo separado foi eliminado.
 
 ### E5. Máquinas conectadas (`et-maquinas`)
-- **Situação:** a função como máquina. Um valor inicial passa por duas etapas, da esquerda para a direita, e se transforma num valor final. A função é f(x) = (x + 2)/5 (soma 2, divide por 5), e a volta é 5y − 2.
+- **Situação:** a função como máquina. Um valor inicial passa por duas etapas, da esquerda para a direita, e se transforma num valor final. A função é f(x) = (x + 2)/5 (soma 2, divide por 5), e a volta é 5y − 2. As versões antigas (x/2 + 3, x/2 + 4) foram superadas.
+- **Momentos:** Montar, Investigar, Explicar e Relacionar. Na ida, as operações são fixas e o aluno escolhe a entrada. Na volta, ele escolhe as operações e usa a saída efetivamente obtida; a primeira operação da volta ocupa a estação da direita.
+- **Ficha:** uma única ficha laranja percorre entrada, entre etapas e saída, mostrando cada valor, e passa atrás dos bocais. A expressão da volta é atualizada a cada escolha, mesmo incorreta. Na tabela, valores que coincidem ficam em negrito, e os divergentes aparecem como "?", convidando à revisão.
+- **Botões:** Refazer apaga a tentativa de volta e preserva a ida. (O botão Nova sai, ver P7.)
 - **Ação do aluno:** conhecendo a função de ida, escolhe entre algumas operações disponíveis as que correspondem a cada etapa da volta, para que a máquina, da direita para a esquerda, devolva o valor de entrada. Pode refazer as escolhas e testar outras entradas.
 - **Representação:** uma tabela com os valores parciais e finais da ida e da volta.
 - **Composição e identidade:** o E5 já trabalha a composição da ida com a volta e a identidade que ela produz (momentos Montar, Investigar, Explicar e Relacionar). A composição, portanto, **está na v1**. A questão em aberto é como o E5 a **justifica** (ver `07`, P5.1).
@@ -69,6 +90,12 @@ Os números E1 a E8 são os rótulos atuais. Os **ids fixos**, que valem daqui e
 
 ### E6. Diário de descobertas (`et-diario`)
 Propõe que o aluno pense sobre cada uma das etapas. A etapa se ampliou durante o desenvolvimento, e a distribuição de funções entre E6, E7 e E8 precisa ser revista para evitar repetições (ver `07`, O4).
+
+- **Retomadas no piloto v0.33:** Rio, Fita, Reflexão e Composição, com os movimentos Recordar, Olhar para a aprendizagem e Explicar.
+- **Rio:** a mesma cena do E2, sem setas que entreguem a ordem da volta. **Fita:** registro simbólico x, x/2, x/2 + 3. **Composição:** acompanha o E5, com y = (n + 2)/5 e n = 5y − 2.
+- **Reflexão escrita:** não recebe julgamento automático de certo ou errado.
+- **Pendências** (ver `07`, P10): retirar a opção oral não gravada; recuperar detalhes visuais da máquina da Fita; integrar as novas imagens.
+- **Intenção original** (especificação do ChatGPT): E6, E7 e E8 eram três páginas de diário: reconstruir (E2–E3), justificar (E4–E5) e transferir e avaliar.
 
 ### E7. Justificar (`et-justificar`): prevista, fora da v1
 O esboço vem do ChatGPT e ainda não está decidido. A ideia é retomar o laboratório gráfico e a composição para o aluno explicar as ideias investigadas:

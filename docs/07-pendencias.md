@@ -6,6 +6,10 @@ Fazer um estudo da hierarquia visual dos elementos que o app destaca. Exemplo em
 
 **Sugestão de método:** para cada tela, listar o que o aluno precisa **perceber** para avançar e conferir se esses elementos são os de maior peso visual (tamanho, contraste, cor, posição, movimento). Hoje, o que se move (P, P′, o rastro) chama mais atenção que o que explica (coordenadas, domínio).
 
+**Já decidido (layout comum v0.33):** cabeçalho compacto com a linha de autoria, sem título duplicado e sem códigos E1/E2; menu de barras amarelas; ajuda e som em ícones proporcionais. Botões na base, nesta ordem: Voltar, ação contextual, Nova, Refazer, Próximo. Amarelo como cor principal das áreas gráficas, roxo para estrutura e textos, laranja com texto branco para a ação destacada, bege como fundo de apoio. A paleta ainda não está uniformizada no código.
+
+**Insumos:** o mapa de atenção E2–E5 do ChatGPT (`outputs/mapa-atencao-E2-E5.md`), que reúne propostas não aprovadas, e as referências autorais https://0asilva.github.io/labirinto-plano/ e https://0asilva.github.io/descubra-com-o-grafico/. Ponto de partida: os alunos pouco leem espontaneamente, então o texto que importa precisa de peso visual e estar ligado à ação.
+
 ## P2. Pergunta final da Investigação 2 de E4
 
 **Atual:** "O reflexo é função sobre a imagem de f?"
@@ -19,7 +23,7 @@ Fazer um estudo da hierarquia visual dos elementos que o app destaca. Exemplo em
 4. Ela não aponta para o **critério observável**: para cada x, um único ponto da curva.
 
 **Direções de reformulação** (são para discutir, não estão prontas):
-- **Instrumento antes da pergunta:** uma reta vertical arrastável que conta quantos pontos do reflexo ela corta. O critério passa a ser algo que o aluno vê.
+- **Instrumento antes da pergunta:** uma reta vertical arrastável que conta quantos pontos do reflexo ela corta. O critério passa a ser algo que o aluno vê. Outros instrumentos candidatos, da especificação do ChatGPT: limpar o rastro, projeções, pausa na varredura e revelação opcional da relação completa.
 - **Pergunta comparativa entre as 4 funções:** "Em quais delas o reflexo é gráfico de uma função?" (múltipla escolha). Isso obriga a explorar todas e produz evidência de critério.
 - **Pergunta sobre o contraste** `fn-quad-pos` × `fn-quad-r`: "A regra é a mesma, x²/4. O que mudou para o reflexo deixar de ser gráfico de função?". Ela leva ao domínio sem nomear injetividade.
 - **Justificação aberta, curta e opcional:** "Como você decidiu?". A resposta entra no `tr-caderno`.
@@ -30,6 +34,7 @@ Fazer um estudo da hierarquia visual dos elementos que o app destaca. Exemplo em
 - **Decisão:** permitir negativos.
 - **Antes de liberar:** verificar o conjunto de operações disponíveis. Se houver raiz quadrada, divisão pela entrada ou algo semelhante, entradas negativas ou nulas quebram a volta. Isso pode ser **intencional**, como mais uma situação de referência, ou precisa ser bloqueado e explicado.
 - **Em qualquer caso:** o intervalo permitido tem de estar **escrito na tela**.
+- **Com a função atual**, f(x) = (x + 2)/5, números negativos não quebram a volta, porque não há raiz nem divisão pela entrada. Falta conferir o cardápio de operações oferecidas na volta e o tratamento dos decimais.
 
 ## P4. E5: botão "refazer escolhas" piscando diante do erro
 
@@ -52,9 +57,9 @@ Ficam fora da v1 por decisão do professor. Registro aqui o que vale considerar 
 
 | # | Decisão | Opções | Observação |
 |---|---|---|---|
-| O1 | ordem de E4 (gráfico) e E5 (máquinas) | manter / trocar | E5 é operatória como E3; colocá-la antes do gráfico fecharia o bloco numérico. Manter faz sentido se E5 foi pensada como retorno ou consolidação depois do gráfico. Depende da intenção original |
+| O1 | ordem de E4 (gráfico) e E5 (máquinas) | manter / trocar | E5 é operatória como E3; colocá-la antes do gráfico fecharia o bloco numérico. Manter faz sentido se E5 foi pensada como retorno ou consolidação depois do gráfico. **A intenção original** (especificação do ChatGPT) era essa: E5 como "Composição e inversa", depois do gráfico |
 | O2 | ~~adotar o `tr-caderno`~~ | **decidido: adotado** (26/11/2026) | ver `03` |
-| O3 | partes de `et-rio` e `et-maquinas` | confirmar pelas telas reais | necessário para o M0 |
+| O3 | partes de `et-rio` e `et-maquinas` | **propostas em `03`** a partir do piloto v0.33; conferir nas telas (P9) | necessário para o M0 |
 | O4 | revisar o E6 (hoje enfadonho, segundo o professor) e definir quem faz o fechamento: retomar a aposta, escolher uma evidência, registrar uma dúvida | (A) tudo no `et-diario`, e E8 fica só com a transferência; (B) o fechamento vira um módulo final próprio, sempre o último liberado, e o diário fica só com os rastros | **Recomendação para a v1: (A)**, porque o E6 já existe e E7 e E8 estão fora. (B) só faz sentido quando E8 voltar, porque o fechamento deve vir **depois** da transferência |
 
 ## P7. E5: duas entradas e ciclo automático
@@ -81,3 +86,12 @@ O professor manteve Planilha + Apps Script para a v1, mas quer retomar a arquite
 ## P9. E2: conferir as telas
 
 A descrição do E2 em `00` foi atualizada a partir dos textos do código v0.33 (plano de ida visível durante a volta, comparação dos dois planos no final). Conferir nas telas e, com isso, fechar as partes de `et-rio` (O3). O professor considera esse ponto já resolvido no piloto.
+
+## P10. Integrações e textos pendentes do piloto
+
+- **E2:** integrar a nova animação do Rio feita com o Claude (`referências/Elementos visuais/rio-pedras/`), preservando as regras do piloto.
+- **E3:** reescrever as instruções do momento Desfazer para dizer que se trata de reconstruir o comprimento de entrada.
+- **E4 e E6:** integrar as novas imagens. Receber o HTML com a explicação geométrica autoral do professor (feito antes com GeoGebra), que pode entrar no E6.
+- **E5:** nova arte do Canva, ainda a revisar.
+- **E6:** retirar a opção oral não gravada; recuperar detalhes visuais da máquina da Fita.
+- **Acessibilidade:** faltam testes com leitores de tela e uma alternativa não visual completa (ver `05`, T15).
