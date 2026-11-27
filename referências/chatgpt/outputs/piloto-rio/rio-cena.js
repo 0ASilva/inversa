@@ -15,12 +15,13 @@ function point(p){const n=node(p[0],p[1]);if(n)return [n.x,n.y];return [CEN.nos[
 if(!global.RioAnimacao){global.RioCena=null;return;}
 class Cena extends global.RioAnimacao{
  async carregar(){const b=await findBase();this.op.base=b;this.atlas=ATLAS;this.cen=CEN;this.E=ATLAS.escala;this.grade={};CEN.nos.forEach(n=>{this.grade[n.c+','+n.r]=n.id;});this.img={};
-  for(const [k,f] of Object.entries(ATLAS.folhas))this.img[k]=await img(b+f.arquivo);
-  this.img.agua_base=await img(b+ATLAS.estaticos.agua_base.arquivo);this.img.margens=await img(b+ATLAS.estaticos.margens.arquivo);
+  const files=[...Object.entries(ATLAS.folhas).map(([k,f])=>[k,f.arquivo]),['agua_base',ATLAS.estaticos.agua_base.arquivo],['margens',ATLAS.estaticos.margens.arquivo]];
+  (await Promise.all(files.map(([k,f])=>img(b+f).then(i=>[k,i])))).forEach(([k,i])=>{this.img[k]=i;});
   this.canvas.width=CEN.largura*this.E;this.canvas.height=CEN.altura*this.E;this._terra=null;this._zerar();
   const loop=t=>{this._desenha(t);this._raf=requestAnimationFrame(loop);};this._raf=requestAnimationFrame(loop);return this;}
  /* Chegada (baú e comemoração) só quando o piloto disser que o plano terminou ali. */
- async _chegou(id){if(this.final)return super._chegou(id);}
+ async _chegou(id){if(!this.final)return;if(id===8&&!this.carregando&&this.bau.estado==='fechado')global.playInverseSound?.('bau');else if(id===0&&this.carregando)global.playInverseSound?.('festa');return super._chegou(id);}
+ _saltar(idDe,B){global.playInverseSound?.('salto');return super._saltar(idDe,B);}
  /* Coloca o personagem num nó, sem animar (Recomeçar, Voltar, Refazer). */
  posicionar(p,carregando){this.reiniciar();const n=node(p[0],p[1]);if(!n)return;this.indice=n.id;this.pers.x=n.x;this.pers.y=n.y;if(carregando){this.carregando=true;this.bau.estado='levado';this.bau.visivel=false;}}
  async passo(step,final){this.final=!!final;const r=await this.mover(MAP[Object.keys(MAP).find(k=>{const d=global.RiverEngine.directions[k];return d.dx===step.to[0]-step.from[0]&&d.dy===step.to[1]-step.from[1];})],1);this.final=false;return r;}

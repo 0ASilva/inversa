@@ -40,7 +40,7 @@ $('go').onclick=run;$('pause').onclick=()=>{state.paused=!state.paused;render();
 function reset(){++runToken;clearTimeout(partyTimer);$('celebration').classList.remove('show');state.trip='out';state.commands=[];state.out=[];state.back=[];state.position=[0,0];state.running=false;state.paused=false;state.page=0;state.active=-1;state.blocked=-1;state.arrived=false;state.done=false;$('wake').replaceChildren();$('blocked-mark').setAttribute('visibility','hidden');setPosition([0,0]);say('Descubra o caminho pelas pedras.');render();}
 $('restart').onclick=reset;$('help').onclick=()=>$('help-dialog').showModal();$('reflect').onclick=()=>{showPlan('compare-out',state.out);showPlan('compare-back',state.back);$('reflection').showModal();};$('play-again').onclick=()=>{$('reflection').close();reset();};
 drawStones();setPosition([0,0]);render();
-if(window.RioCena)window.RioCena.montar($('board').parentElement,$('board')).then(c=>{cena=c;$('wake').replaceChildren();if(!state.running)setPosition(state.position);}).catch(()=>{});
+if(!window.RioCena)$('board').parentElement.classList.remove('scene--carregando');else{const scene=$('board').parentElement;window.RioCena.montar(scene,$('board')).then(c=>{cena=c;$('wake').replaceChildren();if(!state.running)setPosition(state.position);}).catch(()=>{}).finally(()=>scene.classList.remove('scene--carregando'));}
 
 window.InverseActivity={
  help:'Planeje os saltos com as setas. Toque em cada comando para editar. Toque em Ir para experimentar a ida e depois descubra a volta. Próximo avança quando o percurso estiver concluído.',

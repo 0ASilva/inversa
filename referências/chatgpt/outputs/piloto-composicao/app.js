@@ -54,7 +54,7 @@ const wait=ms=>new Promise(r=>setTimeout(r,matchMedia('(prefers-reduced-motion: 
 async function leg(returning,runId){const tr=trials[t];machineLeg=returning?'back':'out';expressionVisible=returning;
  if(returning){tr.back=[null,null,tr.out[2]];boxPosition=2;boxValue=tr.out[2];}else{boxPosition=0;boxValue=tr.x;}
  render();
- for(let k=0;k<2;k++){emerging=false;draw(returning?1-k:k);await wait(1400);if(runId!==token)return false;
+ for(let k=0;k<2;k++){emerging=false;draw(returning?1-k:k);window.playInverseSound?.('maquina',1300);await wait(1400);if(runId!==token)return false;
   boxValue=returning?ops[plan[k]](boxValue):k===0?boxValue+2:boxValue/5;boxPosition=returning?1-k:k+1;
   if(returning)tr.back[boxPosition]=boxValue;else tr.out[boxPosition]=boxValue;
   emerging=true;draw();updateTable();await wait(650);emerging=false;if(runId!==token)return false;}

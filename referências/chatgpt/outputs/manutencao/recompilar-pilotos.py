@@ -4,7 +4,7 @@ out=Path(__file__).resolve().parents[1]
 repo=out.parents[2]
 # Arquivos comuns do layout: o original fica em layout-geral/ e é copiado para cada módulo.
 for name in ['rio','fita','laboratorio','composicao','diario']:
- for f in ['layout.js','layout.css']:shutil.copy2(out/'layout-geral'/f,out/f'piloto-{name}'/f)
+ for f in ['layout.js','layout.css','success-audio.js']:shutil.copy2(out/'layout-geral'/f,out/f'piloto-{name}'/f)
 for number,name in enumerate(['rio','fita','laboratorio','composicao','diario'],2):
  d=out/f'piloto-{name}';s=(d/'index.html').read_text()
  s=re.sub(r'<link rel="stylesheet" href="([^"]+)">',lambda m:'<style>'+(d/m[1]).read_text()+'</style>',s)
