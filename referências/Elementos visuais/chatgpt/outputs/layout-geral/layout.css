@@ -1,0 +1,37 @@
+/* Author-supplied icon artwork is never recolored or redrawn. */
+body{margin:0;background:#f4eeff!important;color:#241436;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+body main,body #lab-inversa-v2{box-sizing:border-box;max-width:640px;width:100%;margin:0 auto;padding:0 12px 10px;display:flex;flex-direction:column;gap:8px;height:100svh;min-height:100svh;background:#fffdf5;position:relative}
+.layout-header{box-sizing:border-box;display:flex!important;flex:none!important;align-items:center!important;gap:8px!important;background:#473366!important;color:white!important;padding:6px 10px!important;margin:0 -12px!important;min-height:54px!important}
+.layout-header .layout-author{margin:0!important;font-size:clamp(12px,3.2vw,15px)!important;line-height:1.2!important;font-weight:400!important;color:white!important;flex:1;white-space:nowrap}
+.layout-header button{display:grid!important;place-items:center!important;background:transparent!important;border:0!important;padding:6px!important;width:40px!important;min-width:40px!important;height:42px!important;min-height:42px!important;border-radius:8px!important;margin:0!important;flex:none!important}
+.layout-header #layout-menu{width:44px!important;min-width:44px!important;margin-right:2px!important}
+.layout-header img{display:block;position:static!important;width:28px;height:28px;object-fit:contain}
+.layout-header #layout-menu img{width:34px;height:24px}
+.layout-header #sound-toggle img{width:30px;height:28px}
+[data-layout-source]{display:none!important}
+.layout-footer{display:flex!important;align-items:center!important;justify-content:space-between;gap:8px;margin: auto 0 0!important;padding:6px 0 0!important;flex:none;width:100%}
+.layout-footer button{font:700 14px/1.1 system-ui;cursor:pointer;min-height:44px;margin:0!important;box-sizing:border-box;box-shadow:none!important;animation:none!important}
+.layout-footer .layout-icon{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;min-width:44px;border:0!important;padding:0!important;border-radius:50%;background:transparent!important}
+.layout-icon img{position:static!important;width:100%;height:100%;display:block;object-fit:contain}
+.layout-footer .layout-primary{flex:1 1 auto;min-width:0;max-width:240px;padding:10px 12px;border:0;border-radius:40px;background:#ff6633!important;color:white!important}
+.layout-footer .layout-new{flex:0 1 100px;min-width:60px;padding:10px 10px;border:2px solid #681787;background:#fffdf5;color:#ff6633;border-radius:40px}
+.layout-footer button:disabled{opacity:.4;cursor:default}
+.layout-feedback{flex:none!important;min-height:38px!important;font-size:14px!important;line-height:1.35!important;text-align:center;margin:0!important;padding:3px 0!important;color:#473366}
+.layout-footer button:focus-visible,.layout-header button:focus-visible{outline:3px solid #eaad15!important;outline-offset:3px}
+.layout-dialog{position:fixed;inset:0;max-width:440px;width:calc(100% - 28px);max-height:85svh;overflow:auto;border:1px solid #e0d6ee;border-radius:18px;background:#fffdf5;padding:20px;color:#241436;box-sizing:border-box}
+.layout-dialog::backdrop{background:#24143688}.layout-dialog h2{font-size:22px}.layout-dialog p{font-size:16px;line-height:1.5}.layout-dialog button{min-height:44px;font:inherit;border:1px solid #e0d6ee;border-radius:10px;background:white;color:#473366;padding:9px 12px}.layout-dialog form{margin-top:16px;text-align:right}.layout-menu-list{display:grid;gap:8px}.layout-menu-list button{text-align:left}.layout-menu-list [aria-current=true]{background:#473366;color:white}
+body[data-activity='5'] #task{font-size:clamp(13px,3.55vw,16px);line-height:1.3;min-height:0;margin:0}
+body[data-activity='5'] .scene.machine-scene{flex:0 0 auto;aspect-ratio:1155/555;max-height:none;min-height:0}
+body[data-activity='5'] #panel{gap:8px}body[data-activity='5'] .cards button{min-height:44px}body[data-activity='5'] #value-table caption{font-size:14px}body[data-activity='5'] th{font-size:14px}body[data-activity='5'] td{font-size:16px}
+body[data-activity='2'] #controls{display:block}body[data-activity='2'] .directions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+body[data-activity='3'] .bottom,body[data-activity='5'] main>footer,body[data-activity='6'] main>footer,body[data-activity='2'] main>footer{display:none}
+body[data-activity='6'] .privacy{font-size:12px;margin:0}body[data-activity='6'] #scene{min-height:140px}body[data-activity='6'] textarea{max-height:110px}
+body[data-activity='4'] #scene{min-height:180px}body[data-activity='4'] #actions:has(>[data-layout-source]:only-child){display:none}
+body main>h2{margin:0;font-size:20px;line-height:1.2}body nav{flex:none}body nav button,body nav span{min-width:0}
+@media(max-width:360px){body main,body #lab-inversa-v2{padding-left:8px;padding-right:8px;gap:6px}.layout-header{margin-left:-8px!important;margin-right:-8px!important;gap:2px!important;padding-left:6px!important;padding-right:6px!important}.layout-header button{width:36px!important;min-width:36px!important}.layout-header .layout-author{font-size:11px!important}.layout-footer{gap:5px}.layout-footer .layout-primary{padding:9px 7px;font-size:13px}.layout-footer .layout-new{min-width:54px;padding:9px 5px}body[data-activity='5'] #task{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.layout-footer *{animation:none!important}}
+[hidden]{display:none!important}
+
+body[data-activity='3'] .machine-area{flex:0 0 auto!important;aspect-ratio:480/300;min-height:0!important}
+
+body[data-activity='2'] .scene{flex:0 0 auto!important;aspect-ratio:480/450;min-height:0!important}

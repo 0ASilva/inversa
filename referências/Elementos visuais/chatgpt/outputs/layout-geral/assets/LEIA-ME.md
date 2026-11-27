@@ -1,0 +1,1 @@
+Ícones extraídos dos SVGs autorais. Caminhos, cores e proporções preservados; viewBox ajustado apenas para retirar margens vazias. Ajuda e Sem Som originais preservados. Menu, som, voltar, próximo e refazer vêm do Layout App Inversa.svg aprovado.
