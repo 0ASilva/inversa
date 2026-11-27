@@ -20,5 +20,19 @@ function refresh(){const s=api.state();back.disabled=!!s.busy;fresh.disabled=!!s
 back.onclick=()=>{if(api.state().atStart)send(-1);else api.back();refresh();};primary.onclick=()=>{api.primary();refresh();};fresh.onclick=()=>{root.querySelectorAll('dialog[open]').forEach(d=>d.close());api.reset();refresh();};retry.onclick=()=>{api.retry();refresh();};next.onclick=()=>{if(api.state().terminal)send(1);else api.next();refresh();};
 for(const d of document.querySelectorAll('#finish,#reflection')){const b=document.createElement('button');b.type='button';b.className='layout-primary';b.textContent='Próximo';b.onclick=()=>{d.close();send(1);};d.append(b);}
 let queued=false;const observer=new MutationObserver(records=>{if(!records.some(r=>!r.target.closest?.('svg,.layout-footer,.layout-header,.layout-dialog')))return;if(queued)return;queued=true;queueMicrotask(()=>{queued=false;refresh();});});observer.observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','disabled','aria-current','aria-pressed']});
-window.InverseLayout={refresh,navigate};refresh();if(embedded)parent.postMessage({type:'inverse:ready'},'*');
+/* Retractable header: hides when the student scrolls down; returns only when pulled (scroll up, swipe down at the top, or tap the handle). */
+const header=document.querySelector('.layout-header');let showHeader=()=>{};
+if(header){const handle=document.createElement('button');handle.type='button';handle.className='layout-header-handle';handle.setAttribute('aria-label','Mostrar cabeçalho');handle.title='Mostrar cabeçalho';handle.hidden=true;root.prepend(handle);
+const marks=new WeakMap();let lock=0,touchY=null,touchTarget=null;
+const measure=()=>header.style.setProperty('--layout-header-h',header.offsetHeight+'px');measure();addEventListener('resize',measure);
+const set=hidden=>{if(header.classList.contains('is-recolhido')===hidden)return;header.classList.toggle('is-recolhido',hidden);handle.hidden=!hidden;lock=performance.now()+450;};
+showHeader=()=>set(false);handle.onclick=showHeader;
+const topOf=t=>t===document||t===document.documentElement||t===document.body?(document.scrollingElement||document.documentElement).scrollTop:t.scrollTop;
+document.addEventListener('scroll',e=>{const t=e.target;if(t.closest?.('.layout-dialog,dialog'))return;const y=topOf(t),last=marks.has(t)?marks.get(t):0;marks.set(t,y);if(performance.now()<lock)return;if(y-last>6&&y>12)set(true);else if(last-y>10)set(false);},{capture:true,passive:true});
+const atTop=el=>{for(let n=el;n&&n.nodeType===1;n=n.parentElement){if(n.scrollTop>0)return false;}return (document.scrollingElement||document.documentElement).scrollTop<=0;};
+addEventListener('touchstart',e=>{touchY=e.touches[0].clientY;touchTarget=e.target;},{passive:true});
+addEventListener('touchmove',e=>{if(touchY===null||!header.classList.contains('is-recolhido'))return;if(e.touches[0].clientY-touchY>40&&atTop(touchTarget)){set(false);touchY=null;}},{passive:true});
+addEventListener('touchend',()=>{touchY=null;},{passive:true});
+addEventListener('wheel',e=>{if(e.deltaY<-20&&header.classList.contains('is-recolhido')&&atTop(e.target))set(false);},{passive:true});}
+window.InverseLayout={refresh,navigate,showHeader};refresh();if(embedded)parent.postMessage({type:'inverse:ready'},'*');
 })();

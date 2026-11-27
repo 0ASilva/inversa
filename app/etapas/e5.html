@@ -21,7 +21,14 @@
 body{margin:0;background:#f4eeff!important;color:#241436;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
 body main,body #lab-inversa-v2{box-sizing:border-box;max-width:640px;width:100%;margin:0 auto;padding:0 12px 10px;display:flex;flex-direction:column;gap:8px;height:100svh;min-height:100svh;background:#fffdf5;position:relative}
 .layout-header{box-sizing:border-box;display:flex!important;flex:none!important;align-items:center!important;gap:8px!important;background:#473366!important;color:white!important;padding:6px 10px!important;margin:0 -12px!important;min-height:54px!important}
-.layout-header .layout-author{margin:0!important;font-size:clamp(12px,3.2vw,15px)!important;line-height:1.2!important;font-weight:400!important;color:white!important;flex:1;white-space:nowrap}
+.layout-header{position:relative;z-index:5;transition:margin-top .25s ease,opacity .2s ease}
+.layout-header.is-recolhido{margin-top:calc(-1 * var(--layout-header-h,54px) - 8px)!important;opacity:0;pointer-events:none}
+.layout-header .layout-author{margin:0!important;display:flex;flex-direction:column;line-height:1.15!important;font-weight:400!important;color:white!important;flex:1;white-space:nowrap;overflow:hidden}
+.layout-header .layout-author strong{font-size:clamp(16px,4.4vw,19px);font-weight:800;letter-spacing:.01em}
+.layout-header .layout-author span{font-size:clamp(11px,3.1vw,13px);opacity:.92}
+.layout-header-handle{position:absolute!important;top:0;left:50%;transform:translateX(-50%);z-index:6;width:88px;height:22px;min-height:0!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;cursor:pointer}
+.layout-header-handle::before{content:'';display:block;width:44px;height:5px;margin:3px auto 0;border-radius:0 0 6px 6px;background:#473366}
+@media(prefers-reduced-motion:reduce){.layout-header{transition:none}}
 .layout-header button{display:grid!important;place-items:center!important;background:transparent!important;border:0!important;padding:6px!important;width:40px!important;min-width:40px!important;height:42px!important;min-height:42px!important;border-radius:8px!important;margin:0!important;flex:none!important}
 .layout-header #layout-menu{width:44px!important;min-width:44px!important;margin-right:2px!important}
 .layout-header img{display:block;position:static!important;width:28px;height:28px;object-fit:contain}
@@ -47,14 +54,14 @@ body[data-activity='3'] .bottom,body[data-activity='5'] main>footer,body[data-ac
 body[data-activity='6'] .privacy{font-size:12px;margin:0}body[data-activity='6'] #scene{min-height:140px}body[data-activity='6'] textarea{max-height:110px}
 body[data-activity='4'] #scene{min-height:180px}body[data-activity='4'] #actions:has(>[data-layout-source]:only-child){display:none}
 body main>h2{margin:0;font-size:20px;line-height:1.2}body nav{flex:none}body nav button,body nav span{min-width:0}
-@media(max-width:360px){body main,body #lab-inversa-v2{padding-left:8px;padding-right:8px;gap:6px}.layout-header{margin-left:-8px!important;margin-right:-8px!important;gap:2px!important;padding-left:6px!important;padding-right:6px!important}.layout-header button{width:36px!important;min-width:36px!important}.layout-header .layout-author{font-size:11px!important}.layout-footer{gap:5px}.layout-footer .layout-primary{padding:9px 7px;font-size:13px}.layout-footer .layout-new{min-width:54px;padding:9px 5px}body[data-activity='5'] #task{font-size:13px}}
+@media(max-width:360px){body main,body #lab-inversa-v2{padding-left:8px;padding-right:8px;gap:6px}.layout-header{margin-left:-8px!important;margin-right:-8px!important;gap:2px!important;padding-left:6px!important;padding-right:6px!important}.layout-header button{width:36px!important;min-width:36px!important}.layout-header .layout-author strong{font-size:15px}.layout-header .layout-author span{font-size:11px}.layout-footer{gap:5px}.layout-footer .layout-primary{padding:9px 7px;font-size:13px}.layout-footer .layout-new{min-width:54px;padding:9px 5px}body[data-activity='5'] #task{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.layout-footer *{animation:none!important}}
 [hidden]{display:none!important}
 
 body[data-activity='3'] .machine-area{flex:0 0 auto!important;aspect-ratio:480/300;min-height:0!important}
 
 body[data-activity='2'] .scene{flex:0 0 auto!important;aspect-ratio:480/450;min-height:0!important}
-</style></head><body data-activity="5"><main><header class="layout-header"><button id="layout-menu" type="button" aria-label="Abrir etapas" title="Etapas"></button><p class="layout-author">André Silva · IFRJ · Piloto</p><button id="help" type="button" aria-label="Ajuda" title="Ajuda"></button><button id="sound-toggle" type="button" aria-label="Silenciar som das comemorações" aria-pressed="true" title="Som"></button></header><nav aria-label="Momentos"><span>Montar</span><span>Investigar</span><span>Explicar</span><span>Relacionar</span></nav><h2 id="title"></h2><p id="task"></p><section class="scene"><svg id="visual" viewBox="0 0 400 220" role="img" aria-label="Percurso pelas duas máquinas"></svg><div id="party" hidden>✦ Boa descoberta! ✦</div></section><div id="panel"></div><p id="feedback" role="status" aria-live="polite"></p><footer><button id="back">Voltar</button><button id="next" class="advance" hidden>Continuar</button><button id="restart">Recomeçar</button></footer></main><script>/* Comemoração curta, gerada localmente. Sem arquivos externos ou persistência. */
+</style></head><body data-activity="5"><main><header class="layout-header"><button id="layout-menu" type="button" aria-label="Abrir etapas" title="Etapas"></button><p class="layout-author"><strong>Inversa</strong><span>Prof. André Silva - v.01</span></p><button id="help" type="button" aria-label="Ajuda" title="Ajuda"></button><button id="sound-toggle" type="button" aria-label="Silenciar som das comemorações" aria-pressed="true" title="Som"></button></header><nav aria-label="Momentos"><span>Montar</span><span>Investigar</span><span>Explicar</span><span>Relacionar</span></nav><h2 id="title"></h2><p id="task"></p><section class="scene"><svg id="visual" viewBox="0 0 400 220" role="img" aria-label="Percurso pelas duas máquinas"></svg><div id="party" hidden>✦ Boa descoberta! ✦</div></section><div id="panel"></div><p id="feedback" role="status" aria-live="polite"></p><footer><button id="back">Voltar</button><button id="next" class="advance" hidden>Continuar</button><button id="restart">Recomeçar</button></footer></main><script>/* Comemoração curta, gerada localmente. Sem arquivos externos ou persistência. */
 (()=>{'use strict';let context,muted=false;
 const button=document.getElementById('sound-toggle');
 function prepare(){if(muted)return null;try{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return null;context??=new Audio();if(context.state==='suspended')context.resume().catch(()=>{});return context;}catch{return null;}}
@@ -174,6 +181,20 @@ function refresh(){const s=api.state();back.disabled=!!s.busy;fresh.disabled=!!s
 back.onclick=()=>{if(api.state().atStart)send(-1);else api.back();refresh();};primary.onclick=()=>{api.primary();refresh();};fresh.onclick=()=>{root.querySelectorAll('dialog[open]').forEach(d=>d.close());api.reset();refresh();};retry.onclick=()=>{api.retry();refresh();};next.onclick=()=>{if(api.state().terminal)send(1);else api.next();refresh();};
 for(const d of document.querySelectorAll('#finish,#reflection')){const b=document.createElement('button');b.type='button';b.className='layout-primary';b.textContent='Próximo';b.onclick=()=>{d.close();send(1);};d.append(b);}
 let queued=false;const observer=new MutationObserver(records=>{if(!records.some(r=>!r.target.closest?.('svg,.layout-footer,.layout-header,.layout-dialog')))return;if(queued)return;queued=true;queueMicrotask(()=>{queued=false;refresh();});});observer.observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','disabled','aria-current','aria-pressed']});
-window.InverseLayout={refresh,navigate};refresh();if(embedded)parent.postMessage({type:'inverse:ready'},'*');
+/* Retractable header: hides when the student scrolls down; returns only when pulled (scroll up, swipe down at the top, or tap the handle). */
+const header=document.querySelector('.layout-header');let showHeader=()=>{};
+if(header){const handle=document.createElement('button');handle.type='button';handle.className='layout-header-handle';handle.setAttribute('aria-label','Mostrar cabeçalho');handle.title='Mostrar cabeçalho';handle.hidden=true;root.prepend(handle);
+const marks=new WeakMap();let lock=0,touchY=null,touchTarget=null;
+const measure=()=>header.style.setProperty('--layout-header-h',header.offsetHeight+'px');measure();addEventListener('resize',measure);
+const set=hidden=>{if(header.classList.contains('is-recolhido')===hidden)return;header.classList.toggle('is-recolhido',hidden);handle.hidden=!hidden;lock=performance.now()+450;};
+showHeader=()=>set(false);handle.onclick=showHeader;
+const topOf=t=>t===document||t===document.documentElement||t===document.body?(document.scrollingElement||document.documentElement).scrollTop:t.scrollTop;
+document.addEventListener('scroll',e=>{const t=e.target;if(t.closest?.('.layout-dialog,dialog'))return;const y=topOf(t),last=marks.has(t)?marks.get(t):0;marks.set(t,y);if(performance.now()<lock)return;if(y-last>6&&y>12)set(true);else if(last-y>10)set(false);},{capture:true,passive:true});
+const atTop=el=>{for(let n=el;n&&n.nodeType===1;n=n.parentElement){if(n.scrollTop>0)return false;}return (document.scrollingElement||document.documentElement).scrollTop<=0;};
+addEventListener('touchstart',e=>{touchY=e.touches[0].clientY;touchTarget=e.target;},{passive:true});
+addEventListener('touchmove',e=>{if(touchY===null||!header.classList.contains('is-recolhido'))return;if(e.touches[0].clientY-touchY>40&&atTop(touchTarget)){set(false);touchY=null;}},{passive:true});
+addEventListener('touchend',()=>{touchY=null;},{passive:true});
+addEventListener('wheel',e=>{if(e.deltaY<-20&&header.classList.contains('is-recolhido')&&atTop(e.target))set(false);},{passive:true});}
+window.InverseLayout={refresh,navigate,showHeader};refresh();if(embedded)parent.postMessage({type:'inverse:ready'},'*');
 })();
 </script></body></html>

@@ -89,9 +89,12 @@ A descrição do E2 em `00` foi atualizada a partir dos textos do código v0.33 
 
 ## P10. Integrações e textos pendentes do piloto
 
-- **E2:** integrar a nova animação do Rio feita com o Claude (`referências/Elementos visuais/rio-pedras/`), preservando as regras do piloto.
+- **E2:** ~~integrar a nova animação do Rio~~ feito em 27/11/2026 (decisão 27): só a cena foi trocada. Falta conferir no celular, pelo link do GitHub Pages, a velocidade dos saltos e o peso das imagens (cerca de 2,6 MB).
 - **E3:** reescrever as instruções do momento Desfazer para dizer que se trata de reconstruir o comprimento de entrada.
-- **E4 e E6:** integrar as novas imagens. Receber o HTML com a explicação geométrica autoral do professor (feito antes com GeoGebra), que pode entrar no E6.
+- **E3, E4 e E6:** ~~integrar as novas imagens~~ feito em 27/11/2026 (decisão 28). A imagem nova é do E3 (máquina de fitas), não do E6; o E6 retoma as imagens novas de E2 a E5.
+- **E3:** os rótulos da máquina passaram a DIVIDIR e SOMAR, como no SVG do professor; os textos de ajuda e de retorno ainda falam em cortar e acrescentar. Decidir se acompanham.
+- **E4 e E6:** Receber o HTML com a explicação geométrica autoral do professor (feito antes com GeoGebra), que pode entrar no E6.
 - **E5:** nova arte do Canva, ainda a revisar.
-- **E6:** retirar a opção oral não gravada; recuperar detalhes visuais da máquina da Fita.
+- **E6:** retirar a opção oral não gravada. (A máquina da Fita no E6 já foi redesenhada com o visual novo.)
+- **E6 em celular pequeno (320 px):** o enunciado do Rio fica parcialmente coberto pela imagem. O defeito já existia no piloto v0.33.
 - **Acessibilidade:** faltam testes com leitores de tela e uma alternativa não visual completa (ver `05`, T15).

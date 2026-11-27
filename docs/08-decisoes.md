@@ -30,3 +30,8 @@ Formato: data · decisão · origem da proposta · motivo · arquivos afetados.
 | 22 | 26/11/2026 | Layout comum v0.33: cabeçalho compacto sem códigos E1/E2; botões na base (Voltar, ação, Nova, Refazer, Próximo; o E5 deixa de ter Nova, ver #13); amarelo, roxo e laranja; usar só os ativos autorais | registrada pelo ChatGPT; confirmada pelo professor | identidade dos apps do professor | 03, 07 (P1) |
 | 23 | 26/11/2026 | Hospedagem no GitHub do professor, repositório `0ASilva/inversa` (público) | professor | — | 05 (D1), 09 |
 | 24 | 26/11/2026 | Todos os acréscimos do plano do ChatGPT (grupo 2 da conciliação) entram em `docs/` | professor | — | todos |
+| 25 | 27/11/2026 | Cabeçalho em duas linhas, "Inversa" e "Prof. André Silva - v.01", retrátil: recolhe para cima quando a página precisa rolar e só volta quando o estudante puxa | professor | ganhar área útil no celular | 03, 05 |
+| 26 | 27/11/2026 | GitHub Pages ligado no repositório público; o app fica público pelo link | professor | avaliar no celular pelo comportamento | 05 (D1), 09 |
+| 27 | 27/11/2026 | E2: trocada só a cena (água, margens, pedras, personagem e baú da animação feita com o Claude). Regras, controles, textos e o "sem queda punitiva" do piloto ficam; a animação nunca mostra um salto bloqueado | professor | manter o que foi validado no piloto | 00, 07 (P10) |
+| 28 | 27/11/2026 | Visual novo de E3 (máquina de fitas, rótulos DIVIDIR e SOMAR) e E4 (plano em degradê, P e P′ como pontos roxos, y = x em branco), a partir dos SVG em `referências/Elementos visuais`; o E6 retoma as imagens novas de E2 a E5 | professor | identidade visual dos apps do professor | 03, 07 (P10) |
+| 29 | 27/11/2026 | Não há pressa: o uso em sala só ocorrerá em 2027 | professor | — | 09 |
