@@ -2,4 +2,5 @@
 math{font-size:25px;color:#473366}#explanation{min-height:58px;max-height:90px}.row button{font-size:13px}button:disabled{opacity:.45;cursor:default}.operation-text.moving text{animation:operation-bounce 3.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes operation-bounce{0%,8%,30%,100%{transform:translateY(0)}16%{transform:translateY(-5px) scaleY(1.1)}24%{transform:translateY(1px)}}@media(prefers-reduced-motion:reduce){.operation-text.moving text{animation:none!important}}@media(max-height:650px){#controls{gap:4px}#explanation{min-height:52px}.row{gap:4px}.row button{min-height:36px;font-size:12px}}
 
 .cena-label{font:800 22px system-ui,sans-serif;letter-spacing:.12em;fill:#fff;paint-order:stroke;stroke:#3d0f52;stroke-width:6px;stroke-linejoin:round}
-#scene:has(svg image){background:#6f58a3}
+/* v0.35: Rio em faixa de proporção fixa (648×340, SVG "E6 Rio final"); a moldura em degradê é desenhada no SVG. */
+#scene:has(svg image){flex:0 0 auto;aspect-ratio:648/340;min-height:0;background:transparent;border-radius:0}

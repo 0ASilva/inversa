@@ -79,6 +79,13 @@ body[data-activity='2'] .scene{flex:0 0 auto!important;aspect-ratio:480/450;min-
 .layout-footer .layout-pulse:not([hidden]):not(:disabled){animation:layout-pulse 1.3s ease-in-out infinite!important}
 @keyframes layout-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
 @media(prefers-reduced-motion:reduce){.layout-footer .layout-pulse{animation:none!important;outline:3px solid #ff6633;outline-offset:2px;border-radius:50%}}
+
+/* v0.35: em E5 a frase de retorno fica acima dos botões (SVGs de E5, 28/11/2026). */
+body[data-activity='5'] .layout-feedback{order:1;margin-top:auto!important}
+body[data-activity='5'] .layout-footer{order:2;margin-top:0!important}
+
+/* v0.35: em telas baixas o enunciado do E6 não encolhe sob a imagem (antes ficava coberto em 320 px). */
+body[data-activity='6'] #prompt{flex-shrink:0}
 </style></head>
 <body data-activity="2">
 <main class="game">
