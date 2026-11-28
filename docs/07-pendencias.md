@@ -89,9 +89,16 @@ A descrição do E2 em `00` foi atualizada a partir dos textos do código v0.33 
 
 ## P10. Integrações e textos pendentes do piloto
 
-- **E2:** integrar a nova animação do Rio feita com o Claude (`referências/Elementos visuais/rio-pedras/`), preservando as regras do piloto.
+- **E2:** ~~integrar a nova animação do Rio~~ feito em 27/11/2026 (decisão 27): só a cena foi trocada. Falta conferir no celular, pelo link do GitHub Pages, a velocidade dos saltos e o peso das imagens (cerca de 2,6 MB).
 - **E3:** reescrever as instruções do momento Desfazer para dizer que se trata de reconstruir o comprimento de entrada.
-- **E4 e E6:** integrar as novas imagens. Receber o HTML com a explicação geométrica autoral do professor (feito antes com GeoGebra), que pode entrar no E6.
-- **E5:** nova arte do Canva, ainda a revisar.
-- **E6:** retirar a opção oral não gravada; recuperar detalhes visuais da máquina da Fita.
+- **E3, E4 e E6:** ~~integrar as novas imagens~~ feito em 27/11/2026 (decisão 28). A imagem nova é do E3 (máquina de fitas), não do E6; o E6 retoma as imagens novas de E2 a E5.
+- **E3:** os rótulos da máquina passaram a DIVIDIR e SOMAR, como no SVG do professor; os textos de ajuda e de retorno ainda falam em cortar e acrescentar. Decidir se acompanham.
+- **E4 e E6:** Receber o HTML com a explicação geométrica autoral do professor (feito antes com GeoGebra), que pode entrar no E6.
+- **E5:** nova arte do Canva, ainda a revisar. Mecânica refeita em 27/11/2026 (decisão 30): o texto do segundo número e o nome do momento ("Investigar") aguardam a aprovação do professor.
+- **E6:** retirar a opção oral não gravada. (A máquina da Fita no E6 já foi redesenhada com o visual novo.)
+- **E6 em celular pequeno (320 px):** o enunciado do Rio fica parcialmente coberto pela imagem. O defeito já existia no piloto v0.33.
 - **Acessibilidade:** faltam testes com leitores de tela e uma alternativa não visual completa (ver `05`, T15).
+
+## P11. Versão para computador: calculadora para números irracionais
+
+No E5 o estudante pode digitar qualquer número real que caiba no teclado: inteiros, decimais, negativos e frações como 1/3. Um irracional só entra como aproximação decimal. A versão para computador deve ter uma calculadora (por exemplo, com √ e π) para experimentar valores irracionais. Ponto a decidir: a tabela mostra até seis casas decimais e marca com "…" o que foi cortado. Isso é suficiente para o estudante perceber que a volta recupera a entrada, ou a calculadora deveria trabalhar com a forma exata (√2, π)?

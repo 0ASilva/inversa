@@ -2,7 +2,14 @@
 body{margin:0;background:#f4eeff!important;color:#241436;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
 body main,body #lab-inversa-v2{box-sizing:border-box;max-width:640px;width:100%;margin:0 auto;padding:0 12px 10px;display:flex;flex-direction:column;gap:8px;height:100svh;min-height:100svh;background:#fffdf5;position:relative}
 .layout-header{box-sizing:border-box;display:flex!important;flex:none!important;align-items:center!important;gap:8px!important;background:#473366!important;color:white!important;padding:6px 10px!important;margin:0 -12px!important;min-height:54px!important}
-.layout-header .layout-author{margin:0!important;font-size:clamp(12px,3.2vw,15px)!important;line-height:1.2!important;font-weight:400!important;color:white!important;flex:1;white-space:nowrap}
+.layout-header{position:relative;z-index:5;transition:margin-top .25s ease,opacity .2s ease}
+.layout-header.is-recolhido{margin-top:calc(-1 * var(--layout-header-h,54px) - 8px)!important;opacity:0;pointer-events:none}
+.layout-header .layout-author{margin:0!important;display:flex;flex-direction:column;line-height:1.15!important;font-weight:400!important;color:white!important;flex:1;white-space:nowrap;overflow:hidden}
+.layout-header .layout-author strong{font-size:clamp(16px,4.4vw,19px);font-weight:800;letter-spacing:.01em}
+.layout-header .layout-author span{font-size:clamp(11px,3.1vw,13px);opacity:.92}
+.layout-header-handle{position:absolute!important;top:0;left:50%;transform:translateX(-50%);z-index:6;width:88px;height:22px;min-height:0!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;cursor:pointer}
+.layout-header-handle::before{content:'';display:block;width:44px;height:5px;margin:3px auto 0;border-radius:0 0 6px 6px;background:#473366}
+@media(prefers-reduced-motion:reduce){.layout-header{transition:none}}
 .layout-header button{display:grid!important;place-items:center!important;background:transparent!important;border:0!important;padding:6px!important;width:40px!important;min-width:40px!important;height:42px!important;min-height:42px!important;border-radius:8px!important;margin:0!important;flex:none!important}
 .layout-header #layout-menu{width:44px!important;min-width:44px!important;margin-right:2px!important}
 .layout-header img{display:block;position:static!important;width:28px;height:28px;object-fit:contain}
@@ -28,10 +35,22 @@ body[data-activity='3'] .bottom,body[data-activity='5'] main>footer,body[data-ac
 body[data-activity='6'] .privacy{font-size:12px;margin:0}body[data-activity='6'] #scene{min-height:140px}body[data-activity='6'] textarea{max-height:110px}
 body[data-activity='4'] #scene{min-height:180px}body[data-activity='4'] #actions:has(>[data-layout-source]:only-child){display:none}
 body main>h2{margin:0;font-size:20px;line-height:1.2}body nav{flex:none}body nav button,body nav span{min-width:0}
-@media(max-width:360px){body main,body #lab-inversa-v2{padding-left:8px;padding-right:8px;gap:6px}.layout-header{margin-left:-8px!important;margin-right:-8px!important;gap:2px!important;padding-left:6px!important;padding-right:6px!important}.layout-header button{width:36px!important;min-width:36px!important}.layout-header .layout-author{font-size:11px!important}.layout-footer{gap:5px}.layout-footer .layout-primary{padding:9px 7px;font-size:13px}.layout-footer .layout-new{min-width:54px;padding:9px 5px}body[data-activity='5'] #task{font-size:13px}}
+@media(max-width:360px){body main,body #lab-inversa-v2{padding-left:8px;padding-right:8px;gap:6px}.layout-header{margin-left:-8px!important;margin-right:-8px!important;gap:2px!important;padding-left:6px!important;padding-right:6px!important}.layout-header button{width:36px!important;min-width:36px!important}.layout-header .layout-author strong{font-size:15px}.layout-header .layout-author span{font-size:11px}.layout-footer{gap:5px}.layout-footer .layout-primary{padding:9px 7px;font-size:13px}.layout-footer .layout-new{min-width:54px;padding:9px 5px}body[data-activity='5'] #task{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.layout-footer *{animation:none!important}}
 [hidden]{display:none!important}
 
 body[data-activity='3'] .machine-area{flex:0 0 auto!important;aspect-ratio:480/300;min-height:0!important}
 
 body[data-activity='2'] .scene{flex:0 0 auto!important;aspect-ratio:480/450;min-height:0!important}
+
+/* Refazer só aparece quando há algo a refazer, e pulsa; Próximo pode pulsar ao fim de uma etapa. */
+.layout-footer .layout-pulse:not([hidden]):not(:disabled){animation:layout-pulse 1.3s ease-in-out infinite!important}
+@keyframes layout-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@media(prefers-reduced-motion:reduce){.layout-footer .layout-pulse{animation:none!important;outline:3px solid #ff6633;outline-offset:2px;border-radius:50%}}
+
+/* v0.35: em E5 a frase de retorno fica acima dos botões (SVGs de E5, 28/11/2026). */
+body[data-activity='5'] .layout-feedback{order:1;margin-top:auto!important}
+body[data-activity='5'] .layout-footer{order:2;margin-top:0!important}
+
+/* v0.35: em telas baixas o enunciado do E6 não encolhe sob a imagem (antes ficava coberto em 320 px). */
+body[data-activity='6'] #prompt{flex-shrink:0}
