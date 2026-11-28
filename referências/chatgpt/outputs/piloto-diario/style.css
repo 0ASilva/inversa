@@ -4,3 +4,6 @@ math{font-size:25px;color:#473366}#explanation{min-height:58px;max-height:90px}.
 .cena-label{font:800 22px system-ui,sans-serif;letter-spacing:.12em;fill:#fff;paint-order:stroke;stroke:#3d0f52;stroke-width:6px;stroke-linejoin:round}
 /* v0.35: Rio em faixa de proporção fixa (648×340, SVG "E6 Rio final"); a moldura em degradê é desenhada no SVG. */
 #scene:has(svg image){flex:0 0 auto;aspect-ratio:648/340;min-height:0;background:transparent;border-radius:0}
+
+/* v0.35: na Fita, a equação f(x) = x/2 + 3 fica centralizada (28/11/2026). */
+#title.title-eq{text-align:center}
