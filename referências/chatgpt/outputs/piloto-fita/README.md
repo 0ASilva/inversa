@@ -33,3 +33,8 @@ Atualização 23/11/2026: controles laranja com texto branco; acertos e sucessos
 ## Layout comum v0.33 — 26/11/2026
 
 Cabeçalho e rodapé agora usam layout.js, layout.css e icons.js. A lógica expõe window.InverseActivity para os controles contextuais. Ver ../layout-geral/README.md. Recompilar pelo script ../manutencao/recompilar-pilotos.py; não usar montagens antigas que omitam esses arquivos. Animações e regra matemática preservadas.
+
+
+## v0.36 — 28/11/2026 (decisão 41)
+
+Controle de comprimento em décimos, de 2 a 12 cm; ao soltar, a fita passa sozinha pela máquina (o Ir repete). Depois de cada acerto em Representar, Desfazer e Generalizar, o retorno diz "Correto!", há comemoração com confete e som, e a tela seguinte abre sozinha. Generalizar e a reflexão usam x no lugar de n. A reflexão tem Rever escrita, Experimentar novamente (ícone Refazer) e Próximo lado a lado no pé. Textos com DIVIDIR e SOMAR (ida) e SUBTRAIR e MULTIPLICAR POR 2 (volta). Com valores decimais, a validação compara o número arredondado a uma casa, por isso 7,3 e 7,30 valem.
