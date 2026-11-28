@@ -4,7 +4,7 @@
 /* v0.35 (28/11/2026, SVGs "E5 explicação" e "E5 Relacionar"): Explicar ganha o esquema x → y → x; Relacionar ganha o plano novo,
    controle de 0 a 12 em passos de STEP, Varrer e, após a resposta, tabela e fórmula. O botão de ordem saiu. */
 const EX=7.2,STEP=0.1,TABLE=[1,2,3],snap=v=>Math.round(v/STEP)*STEP,pair=v=>`(${fmt(v)}; ${fmt(v)})`;
-let swept=false,sweepTo=null,sweepRun=0,lastChoice=5;
+let swept=false,sweepTo=null,sweepRun=0,sweeping=false,lastChoice=5;
 let stage=0,n=10,plan=[],step=0,passed=false,busy=false,reverse=false,trail=[],timer,token=0,last=null,machineLeg='out',boxPosition=0,boxValue=null,emerging=false,expressionVisible=false;
 let trials=[],t=0,phase='input',inputText='',lastResult='';
 const blank=()=>({x:null,out:[null,null,null],back:[null,null,null],status:'input'});
@@ -12,7 +12,7 @@ const say=m=>$('feedback').textContent=m;
 const SECOND='Agora teste um número não inteiro, como −3,5 ou 1/3. A volta ainda recupera a entrada?';
 function celebrate(m){window.playSuccessSound?.();$('party').textContent='✦ '+m+' ✦';$('party').hidden=false;clearTimeout(timer);timer=setTimeout(()=>$('party').hidden=true,1300);}
 function parse(text){const c=text.trim().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/,/g,'.');if(/^-?(\d+(\.\d*)?|\.\d+)$/.test(c))return Number(c);const f=c.match(/^(-?)(\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);if(f&&Number(f[3])!==0)return (f[1]?-1:1)*Number(f[2])/Number(f[3]);return NaN;}
-function reset(){token++;sweepRun++;swept=false;sweepTo=null;busy=false;stage=0;plan=[];step=0;passed=false;reverse=false;trail=[];last=null;clearTimeout(timer);$('party').hidden=true;trials=[blank()];t=0;startInput();}
+function reset(){token++;sweepRun++;sweeping=false;swept=false;sweepTo=null;busy=false;stage=0;plan=[];step=0;passed=false;reverse=false;trail=[];last=null;clearTimeout(timer);$('party').hidden=true;trials=[blank()];t=0;startInput();}
 function startInput(){phase='input';machineLeg='out';expressionVisible=false;inputText='';boxPosition=0;boxValue=null;lastResult='';say('');render();setTimeout(()=>$('entry')?.focus({preventScroll:true}),60);}
 function button(text,fn,cls=''){const b=document.createElement('button');b.textContent=text;b.className=cls;b.onclick=fn;b.disabled=busy;return b;}
 function row(){const e=document.createElement('div');e.className='row';return e;}
@@ -24,9 +24,9 @@ function slider(){const l=document.createElement('label');l.id='rel-label';l.tex
 function liveRel(){const l=$('rel-label');if(l)l.firstChild.textContent=`Número de entrada: ${fmt(n)}`;const r=$('rel-range');if(r&&+r.value!==n)r.value=n;const c=$('rel-chain');if(c)c.replaceWith(chain());}
 function chain(){const e=document.createElement('div');e.id='rel-chain';e.className='rel-chain';e.setAttribute('aria-label',`${fmt(n)}, pela f, vai a ${fmt((n+2)/5)}; pela f inversa, volta a ${fmt(n)}`);
  e.innerHTML=`<span>${fmt(n)}</span><span class="rel-arrow"><i class="math">f</i>→</span><span>${fmt((n+2)/5)}</span><span class="rel-arrow"><i class="math">f<sup>−1</sup></i>→</span><span>${fmt(n)}</span>`;return e;}
-async function sweep(){if(busy)return;busy=true;swept=true;const run=++sweepRun,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,dur=reduce?0:4000,start=performance.now();render();
+async function sweep(){if(busy)return;busy=true;sweeping=true;swept=true;const run=++sweepRun,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,dur=reduce?0:4000,start=performance.now();render();
  await new Promise(done=>{function frame(now){if(run!==sweepRun)return done();const t=dur?Math.min(1,(now-start)/dur):1;sweepTo=12*t;n=snap(sweepTo);liveRel();draw();if(t<1)requestAnimationFrame(frame);else done();}requestAnimationFrame(frame);});
- if(run!==sweepRun)return;n=12;sweepTo=12;busy=false;render();}
+ if(run!==sweepRun)return;n=12;sweepTo=12;busy=false;sweeping=false;render();}
 const frac=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
 function explainDiagram(){const x=fmt(EX),y=fmt((EX+2)/5),T=(px,py,t,anchor='middle')=>`<text x="${px}" y="${py}" text-anchor="${anchor}">${t}</text>`,v=t=>`<tspan font-style="italic">${t}</tspan>`;
  const arrow='marker-end="url(#ex-seta)"';
@@ -95,7 +95,8 @@ const wait=ms=>new Promise(r=>setTimeout(r,matchMedia('(prefers-reduced-motion: 
 async function leg(returning,runId){const tr=trials[t];machineLeg=returning?'back':'out';expressionVisible=returning;
  if(returning){tr.back=[null,null,tr.out[2]];boxPosition=2;boxValue=tr.out[2];}else{boxPosition=0;boxValue=tr.x;}
  render();
- for(let k=0;k<2;k++){emerging=false;draw(returning?1-k:k);window.playInverseSound?.('maquina',1300);await wait(1400);if(runId!==token)return false;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;/* Com movimento reduzido as esperas são 0 ms: um só som curto por trecho, para não sobrepor. */if(reduced)window.playInverseSound?.('maquina',500);
+ for(let k=0;k<2;k++){emerging=false;draw(returning?1-k:k);if(!reduced)window.playInverseSound?.('maquina',1300);await wait(1400);if(runId!==token)return false;
   boxValue=returning?ops[plan[k]](boxValue):k===0?boxValue+2:boxValue/5;boxPosition=returning?1-k:k+1;
   if(returning)tr.back[boxPosition]=boxValue;else tr.out[boxPosition]=boxValue;
   emerging=true;draw();updateTable();await wait(650);emerging=false;if(runId!==token)return false;}
@@ -134,7 +135,7 @@ function buildJourney(p){
 function render(){const visible=[0,2,3];document.querySelectorAll('nav span').forEach((e,i)=>e.classList.toggle('active',visible[i]===stage));
  $('title').textContent=['Ida e volta da máquina','','Por que a entrada é recuperada?','Que gráfico esse percurso produz?'][stage];
  $('task').textContent=['','','Acompanhe a composição e identifique as ações que se desfazem.','Mova a entrada. Cada ponto relaciona a entrada do percurso à saída final.'][stage];$('task').hidden=stage===0||stage===3;
- $('next').hidden=!passed;$('next').disabled=busy;$('back').hidden=stage===0;$('back').disabled=busy;$('restart').disabled=busy;const p=$('panel');p.replaceChildren();
+ $('next').hidden=!passed;$('next').disabled=busy;$('back').hidden=stage===0;$('back').disabled=busy&&!sweeping;$('restart').disabled=busy&&!sweeping;const p=$('panel');p.replaceChildren();
  if(stage===0){buildJourney(p);
 }else if(stage===2){const expressions=['x → (x + 2)/5 → 5((x + 2)/5) − 2','x → (x + 2) − 2 → x','A cada entrada, a própria entrada.'];const e=document.createElement('div');e.className='equation';e.textContent=expressions[step];p.append(e);const prompt=document.createElement('p');prompt.textContent=['O que desfaz dividir por 5?','O que desfaz somar 2?','Esse percurso é uma função identidade.'][step];p.append(prompt);if(step===2){prompt.className='ex-identity';const d=document.createElement('div');d.className='ex-wrap';d.innerHTML=explainDiagram();p.append(d);}if(step<2){const choices=document.createElement('div');choices.className='choices';const labels=step===0?['Multiplicar por 5','Retirar 5']:['Retirar 2','Dividir por 2'];labels.forEach((label,i)=>choices.append(button(label,()=>{if(i===0){celebrate('Uma relação explicada!');step++;passed=step===2;if(step===2){boxValue=EX;boxPosition=0;machineLeg='out';}say(step===2?'A composição recupera toda entrada do domínio, não apenas os exemplos.':'Agora observe a soma de 2 e sua operação inversa.');render();}else say('Acompanhe a operação anterior: qual ação recupera o número?');})));p.append(choices);}
 }else{if(!passed){p.append(instruction('Mova a entrada. Cada ponto relaciona a entrada do percurso à saída final.','rel-task'));const r=document.createElement('div');r.className='rel-controls';r.append(slider(),button('Varrer',sweep,'rel-sweep'));p.append(r);p.append(chain());const h=document.createElement('p');h.className='rel-heading';h.textContent='Nesta situação temos';p.append(h);const choices=document.createElement('div');choices.className='choices';choices.append(button('Saída = entrada',()=>{passed=true;n=lastChoice;celebrate('Identidade descoberta!');say('Os pontos pertencem à reta y = x, na parte correspondente ao domínio.');render();}),button('Saída = dobro',()=>say('Compare as coordenadas de cada ponto: o que permanece igual?')));p.append(choices);}
@@ -142,11 +143,11 @@ function render(){const visible=[0,2,3];document.querySelectorAll('nav span').fo
  const f=document.createElement('p');f.className='rel-formula math-block';f.setAttribute('aria-label','f inversa de f de x é igual a f inversa de x mais 2 sobre 5, que é igual a 5 vezes x mais 2 sobre 5, menos 2, que é igual a x');f.innerHTML=`<i>f</i><sup>−1</sup>(<i>f</i>(<i>x</i>)) = <i>f</i><sup>−1</sup>(${frac('<i>x</i> + 2','5')}) = 5(${frac('<i>x</i> + 2','5')}) − 2 = <i>x</i>`;p.append(f);}}
 draw();}
 $('next').onclick=()=>{if(stage===3){say('E5 concluída. Explique: por que experimentar exemplos não substitui justificar a regra?');celebrate('Percurso concluído!');return;}stage=stage===0?2:stage+1;passed=false;last=null;if(stage===2)step=0;if(stage===3){/* Parte do último número testado em Investigar, limitado a 0–12 (decisão 37). */const tested=trials.filter(tr=>tr.x!=null).map(tr=>tr.x).pop();n=Math.min(12,Math.max(0,snap(tested??5)));lastChoice=n;trail=[n];swept=false;sweepTo=null;}say('');machineLeg='out';render();};
-$('back').onclick=()=>{sweepRun++;busy=false;swept=false;sweepTo=null;stage=stage===2?0:Math.max(0,stage-1);passed=false;step=0;last=null;if(stage===0){reset();return;}say('');render();};$('restart').onclick=reset;reset();
+$('back').onclick=()=>{sweepRun++;busy=false;sweeping=false;swept=false;sweepTo=null;stage=stage===2?0:Math.max(0,stage-1);passed=false;step=0;last=null;if(stage===0){reset();return;}say('');render();};$('restart').onclick=reset;reset();
 window.InverseActivity={
  help:'Digite um número em x e toque em Ir: a máquina faz a ida. Depois escolha, na ordem, as duas operações da volta; a máquina volta sozinha. Se a volta não recuperar a entrada, toque em Refazer. Repita com um segundo número.',
  sources:['#next','#back','#restart'],
- state:()=>({atStart:stage===0,busy,primary:stage===0&&phase==='input'?{label:'Ir',disabled:busy||!Number.isFinite(parse(inputText))}:null,retry:stage===0&&phase==='wrong'&&!busy,next:!busy&&passed,nextPulse:passed&&stage===0,terminal:stage===3&&passed,nextLabel:'Próximo'}),
+ state:()=>({atStart:stage===0,busy:busy&&!sweeping,primary:stage===0&&phase==='input'?{label:'Ir',disabled:busy||!Number.isFinite(parse(inputText))}:null,retry:stage===0&&phase==='wrong'&&!busy,next:!busy&&passed,nextPulse:passed&&stage===0,terminal:stage===3&&passed,nextLabel:'Próximo'}),
  primary:go,next:()=>$('next').click(),back:()=>$('back').click(),reset,retry:redo
 };
 })();
