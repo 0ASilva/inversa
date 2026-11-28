@@ -92,7 +92,7 @@ A descrição do E2 em `00` foi atualizada a partir dos textos do código v0.33 
 - **E2:** ~~integrar a nova animação do Rio~~ feito em 27/11/2026 (decisão 27): só a cena foi trocada. Falta conferir no celular, pelo link do GitHub Pages, a velocidade dos saltos e o peso das imagens (cerca de 2,6 MB).
 - **E3:** reescrever as instruções do momento Desfazer para dizer que se trata de reconstruir o comprimento de entrada.
 - **E3, E4 e E6:** ~~integrar as novas imagens~~ feito em 27/11/2026 (decisão 28). A imagem nova é do E3 (máquina de fitas), não do E6; o E6 retoma as imagens novas de E2 a E5.
-- **E3:** os rótulos da máquina passaram a DIVIDIR e SOMAR, como no SVG do professor; os textos de ajuda e de retorno ainda falam em cortar e acrescentar. Decidir se acompanham.
+- **E3:** ~~os textos de ajuda e de retorno ainda falam em cortar e acrescentar~~ feito em 28/11/2026 (decisão 41): passam a DIVIDIR e SOMAR; na volta, SUBTRAIR e MULTIPLICAR POR 2. Falta o professor confirmar se "Dobrar" deve continuar no lugar de "Multiplicar por 2" e se a faixa do controle continua de 2 a 12 cm.
 - **E4 e E6:** Receber o HTML com a explicação geométrica autoral do professor (feito antes com GeoGebra), que pode entrar no E6.
 - **E5:** nova arte do Canva, ainda a revisar. Mecânica refeita em 27/11/2026 (decisão 30): o texto do segundo número e o nome do momento ("Investigar") aguardam a aprovação do professor.
 - **E6:** retirar a opção oral não gravada. (A máquina da Fita no E6 já foi redesenhada com o visual novo.)

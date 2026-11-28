@@ -16,3 +16,14 @@
 .go,#next,.advance,#lab-inversa-v2 .btn-primary{color:#fff}
 #sound-toggle{flex:none;min-height:36px;padding:4px 6px;border:1px solid #a290b7;border-radius:9px;background:transparent;color:white;font-size:12px;font-weight:650;cursor:pointer}
 header .brand,header>div{min-width:0}header .brand{gap:6px}
+
+/* v0.36 (28/11/2026): pé da reflexão com Rever escrita, Experimentar novamente e Próximo lado a lado; confete da comemoração. */
+#finish .dialog-footer{margin-top:14px!important;padding:0!important;justify-content:space-between}
+#finish .dialog-footer form{display:contents}
+#finish .dialog-footer .layout-new{flex:0 1 150px;min-width:0;white-space:nowrap}
+#finish h2{margin:4px 0 10px}#finish p{margin:9px 0}
+#confetti{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none;z-index:3}
+#party{z-index:4}
+#confetti i{position:absolute;left:-4px;top:-6px;width:8px;height:12px;border-radius:2px;opacity:0;animation:confetti 1.3s cubic-bezier(.15,.7,.35,1) forwards}
+@keyframes confetti{0%{opacity:1;transform:translate(0,0) rotate(0) scale(.6)}70%{opacity:1}100%{opacity:0;transform:translate(var(--dx),calc(var(--dy) + 70px)) rotate(var(--rot)) scale(1)}}
+@media(prefers-reduced-motion:reduce){#confetti{display:none}}
