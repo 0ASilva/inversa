@@ -279,7 +279,11 @@ draw();}
 $('next').onclick=()=>{if(stage===3){say('E5 concluída. Explique: por que experimentar exemplos não substitui justificar a regra?');celebrate('Percurso concluído!');return;}stage=stage===0?2:stage+1;passed=false;last=null;if(stage===2)step=0;if(stage===3){/* Parte do último número testado em Investigar, limitado a 0–12 (decisão 37). */const tested=trials.filter(tr=>tr.x!=null).map(tr=>tr.x).pop();n=Math.min(12,Math.max(0,snap(tested??5)));lastChoice=n;trail=[n];swept=false;sweepTo=null;}say('');machineLeg='out';render();};
 $('back').onclick=()=>{sweepRun++;busy=false;sweeping=false;swept=false;sweepTo=null;stage=stage===2?0:Math.max(0,stage-1);passed=false;step=0;last=null;if(stage===0){reset();return;}say('');render();};$('restart').onclick=reset;reset();
 window.InverseActivity={
- help:'Digite um número em x e toque em Ir: a máquina faz a ida. Depois escolha, na ordem, as duas operações da volta; a máquina volta sozinha. Se a volta não recuperar a entrada, toque em Refazer. Repita com um segundo número.',
+ /* Ajuda de cada momento (revisão do Gemini, decisão 40). */
+ get help(){return [
+  'Digite um número em x e toque em Ir: a máquina faz a ida. Depois escolha, na ordem, as duas operações da volta; a máquina volta sozinha. Se a volta não recuperar a entrada, toque em Refazer. Repita com um segundo número, diferente do primeiro.','',
+  'Acompanhe a composição: a máquina soma 2 e depois divide por 5. Em cada pergunta, escolha a operação que desfaz a etapa indicada. Ao final, veja por que qualquer entrada é recuperada.',
+  'Arraste o controle e solte: cada vez que você solta, o gráfico marca o ponto (entrada; saída final). Toque em Varrer para ver o percurso de 0 a 12 de uma vez. Depois responda o que acontece com a saída em relação à entrada.'][stage];},
  sources:['#next','#back','#restart'],
  state:()=>({atStart:stage===0,busy:busy&&!sweeping,primary:stage===0&&phase==='input'?{label:'Ir',disabled:busy||!Number.isFinite(parse(inputText))}:null,retry:stage===0&&phase==='wrong'&&!busy,next:!busy&&passed,nextPulse:passed&&stage===0,terminal:stage===3&&passed,nextLabel:'Próximo'}),
  primary:go,next:()=>$('next').click(),back:()=>$('back').click(),reset,retry:redo
